@@ -31,6 +31,9 @@
         linear-gradient(#030100, #100402 52%, #030100);
       overflow-x: hidden;
     }
+    body.descent-active {
+      overflow: hidden;
+    }
 
     body::before {
       content: "";
@@ -123,6 +126,104 @@
     @keyframes soulFlail {
       0% { transform: rotate(calc(var(--tilt) - 13deg)) skewX(-3deg); }
       100% { transform: rotate(calc(var(--tilt) + 15deg)) skewX(4deg); }
+    }
+
+    .descent-intro {
+      position: fixed;
+      inset: 0;
+      z-index: 9500;
+      pointer-events: none;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 112%, rgba(255, 87, 16, .78), transparent 17rem),
+        radial-gradient(circle at 20% 18%, rgba(176, 19, 4, .4), transparent 24rem),
+        radial-gradient(circle at 82% 30%, rgba(255, 73, 12, .27), transparent 22rem),
+        linear-gradient(180deg, #020100 0%, #160301 42%, #4c0902 76%, #050100 100%);
+      animation: descentVanish 5.35s ease forwards;
+    }
+    .descent-intro::before,
+    .descent-intro::after {
+      content: "";
+      position: absolute;
+      inset: -60vh -10vw;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.82), transparent 18%, transparent 82%, rgba(0,0,0,.85)),
+        repeating-linear-gradient(180deg, rgba(255, 74, 12, .04) 0 7rem, rgba(255, 198, 84, .16) 7rem 7.35rem, rgba(0, 0, 0, .12) 7.35rem 13rem),
+        radial-gradient(ellipse at 50% 50%, transparent 0 14%, rgba(0, 0, 0, .5) 64%, rgba(0,0,0,.9) 100%);
+      filter: blur(1px);
+      transform: translateY(-36vh) scale(1.12);
+      animation: hellShaft 5.1s cubic-bezier(.12,.72,.16,1) forwards;
+    }
+    .descent-intro::after {
+      inset: auto -10vw -8rem;
+      height: 32rem;
+      background:
+        radial-gradient(ellipse at 50% 96%, rgba(255, 218, 104, .72), rgba(255, 72, 8, .55) 18%, rgba(107, 7, 0, .34) 45%, transparent 70%),
+        repeating-linear-gradient(90deg, transparent 0 3.4rem, rgba(255, 86, 20, .22) 3.4rem 3.55rem, transparent 3.55rem 7rem);
+      filter: blur(18px);
+      transform: translateY(14rem) scaleX(1.1);
+      animation: furnaceRise 5.1s ease-out forwards;
+    }
+    .descent-title {
+      position: absolute;
+      left: 50%;
+      top: 52%;
+      transform: translate(-50%, -50%) scale(1.28);
+      width: min(92vw, 950px);
+      text-align: center;
+      color: #ff4a20;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font: clamp(3.5rem, 11vw, 8rem)/.85 Impact, Haettenschweiler, "Arial Narrow Bold", sans-serif;
+      text-shadow: 0 0 12px rgba(255, 74, 28, .95), 0 0 50px rgba(255, 32, 0, .75), 0 0 100px rgba(120, 0, 0, .8);
+      opacity: 0;
+      animation: descentTitle 5.1s ease forwards;
+    }
+    .descent-soul {
+      position: absolute;
+      top: -26vh;
+      left: var(--x);
+      width: var(--size);
+      filter:
+        drop-shadow(0 0 7px rgba(255, 131, 55, .9))
+        drop-shadow(0 0 28px rgba(255, 39, 0, .65))
+        blur(var(--blur, 0px));
+      opacity: 0;
+      transform-origin: 50% 50%;
+      animation: descentSoul 5.05s cubic-bezier(.1,.58,.18,1) forwards;
+      animation-delay: var(--delay);
+    }
+    .descent-soul img {
+      display: block;
+      width: 100%;
+      height: auto;
+      transform: rotate(var(--tilt));
+      animation: soulFlail var(--flail) ease-in-out infinite alternate;
+    }
+    @keyframes hellShaft {
+      0% { transform: translateY(-42vh) scale(1.38); filter: blur(7px); }
+      55% { filter: blur(2px); }
+      100% { transform: translateY(42vh) scale(.95); filter: blur(0); }
+    }
+    @keyframes furnaceRise {
+      0% { transform: translateY(18rem) scaleX(1.25); opacity: .45; }
+      62% { opacity: .94; }
+      100% { transform: translateY(-4rem) scaleX(1); opacity: .72; }
+    }
+    @keyframes descentSoul {
+      0% { opacity: 0; transform: translate3d(0,-18vh,0) rotate(var(--rot)) scale(.72); }
+      12% { opacity: var(--alpha); }
+      64% { opacity: calc(var(--alpha) * .94); }
+      100% { opacity: 0; transform: translate3d(var(--drift),128vh,0) rotate(calc(var(--rot) + var(--spin))) scale(1.38); }
+    }
+    @keyframes descentTitle {
+      0%, 64% { opacity: 0; transform: translate(-50%, -42%) scale(1.45); filter: blur(10px); }
+      82% { opacity: .92; filter: blur(0); }
+      100% { opacity: 0; transform: translate(-50%, -50%) scale(.92); }
+    }
+    @keyframes descentVanish {
+      0%, 82% { opacity: 1; visibility: visible; }
+      100% { opacity: 0; visibility: hidden; }
     }
 
     header {
@@ -431,6 +532,100 @@
     .archive-card h4 { margin: 0 0 .55rem; color: #eab996; font-size: 1.15rem; }
     .archive-card p { margin: 0; color: #8e7768; line-height: 1.6; font-size: .92rem; }
 
+    .holiday-stage {
+      max-width: 1120px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr);
+      gap: 1rem;
+      align-items: stretch;
+    }
+    .holiday-feature,
+    .holiday-active,
+    .holiday-card {
+      position: relative;
+      border: 1px solid rgba(212, 61, 28, .46);
+      background: linear-gradient(145deg, rgba(30, 5, 2, .92), rgba(6, 1, 0, .88));
+      box-shadow: inset 0 0 40px rgba(0,0,0,.68), 0 18px 50px rgba(0,0,0,.28);
+      overflow: hidden;
+    }
+    .holiday-feature { padding: clamp(1.5rem, 4vw, 2.8rem); min-height: 360px; }
+    .holiday-active { padding: 1.35rem; }
+    .holiday-feature::before,
+    .holiday-active::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at 85% 10%, rgba(255, 94, 26, .22), transparent 15rem);
+    }
+    .holiday-feature > *,
+    .holiday-active > * { position: relative; z-index: 1; }
+    .holiday-date {
+      color: #ff8756;
+      text-transform: uppercase;
+      letter-spacing: .18em;
+      font: 800 .72rem Arial, sans-serif;
+    }
+    .holiday-feature h3,
+    .holiday-active h3 {
+      margin: .55rem 0 .8rem;
+      color: #f3c09a;
+      font-size: clamp(1.6rem, 4vw, 3rem);
+      line-height: 1;
+    }
+    .holiday-feature p,
+    .holiday-active p,
+    .holiday-card p {
+      color: #a98e7b;
+      line-height: 1.7;
+    }
+    .holiday-active-list { display: grid; gap: .85rem; margin-top: 1rem; }
+    .holiday-mini {
+      padding: 1rem;
+      border: 1px solid rgba(151, 39, 18, .55);
+      background: rgba(8, 2, 1, .66);
+    }
+    .holiday-mini h4 { margin: 0 0 .45rem; color: #efbd98; font-size: 1.08rem; }
+    .holiday-directory-grid {
+      max-width: 1120px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    .holiday-card {
+      display: block;
+      min-height: 190px;
+      padding: 1.2rem;
+      color: inherit;
+      text-decoration: none;
+      transition: .2s ease;
+    }
+    .holiday-card:hover,
+    .holiday-card:focus-visible {
+      border-color: #ef4b22;
+      transform: translateY(-4px);
+      box-shadow: 0 0 22px rgba(255, 49, 5, .24), inset 0 0 36px rgba(0,0,0,.7);
+    }
+    .holiday-card h4 { margin: .4rem 0 .55rem; color: #eab996; font-size: 1.12rem; }
+    .holiday-card .holiday-date { font-size: .62rem; letter-spacing: .14em; }
+    .holiday-empty { color: #806758; font-style: italic; }
+    .holiday-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1.5rem;
+    }
+    .holiday-status {
+      color: #a68470;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font: 800 .7rem Arial, sans-serif;
+    }
+
     .cta {
       display: inline-block;
       margin-top: 1rem;
@@ -626,6 +821,8 @@
     @media (max-width: 980px) {
       .story-grid { grid-template-columns: 1fr 1fr; }
       .archive-grid { grid-template-columns: 1fr 1fr; }
+      .holiday-stage { grid-template-columns: 1fr; }
+      .holiday-directory-grid { grid-template-columns: 1fr 1fr; }
       .manifesto-grid { grid-template-columns: 1fr; }
     }
     @media (max-width: 760px) {
@@ -646,6 +843,7 @@
       .hell-fog { bottom: -7rem; height: 10rem; filter: blur(18px); }
       .demon { display: none; }
       .story-grid, .archive-grid { grid-template-columns: 1fr; }
+      .holiday-directory-grid { grid-template-columns: 1fr; }
       .falling-soul { --size: 32px !important; }
       .falling-soul:nth-child(3),
       .falling-soul:nth-child(4),
@@ -664,15 +862,26 @@
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; scroll-behavior: auto !important; }
-      .falling-souls { display: none; }
+      .falling-souls, .descent-intro { display: none; }
     }
   </style>
   <link rel="stylesheet" href="../assets/site-performance.css">
   <script src="../assets/site-performance.js" defer></script>
 </head>
-<body>
+<body class="descent-active">
   <!-- Continuous infernal ambience. Browsers may require one user interaction before audible autoplay is permitted. -->
-  <audio id="hellAmbientAudio" src="assets/audio/hell-1.mp3" autoplay loop preload="auto" playsinline></audio>
+  <audio id="hellAmbientAudio" src="assets/audio/hell-4.mp3" autoplay loop preload="auto" playsinline></audio>
+  <div class="descent-intro" aria-hidden="true">
+    <span class="descent-soul" style="--x:5vw;--size:145px;--delay:.05s;--tilt:-18deg;--rot:-25deg;--spin:620deg;--drift:16vw;--alpha:.82;--flail:.72s;"><img src="assets/falling-souls/soul-01.png" alt=""></span>
+    <span class="descent-soul" style="--x:16vw;--size:92px;--delay:.35s;--tilt:34deg;--rot:15deg;--spin:-540deg;--drift:-8vw;--alpha:.62;--flail:.9s;--blur:.2px;"><img src="assets/falling-souls/soul-02.png" alt=""></span>
+    <span class="descent-soul" style="--x:29vw;--size:128px;--delay:.62s;--tilt:-48deg;--rot:55deg;--spin:700deg;--drift:11vw;--alpha:.5;--flail:.66s;--blur:.5px;"><img src="assets/falling-souls/soul-03.png" alt=""></span>
+    <span class="descent-soul" style="--x:73vw;--size:154px;--delay:.18s;--tilt:24deg;--rot:-80deg;--spin:-680deg;--drift:-18vw;--alpha:.76;--flail:.78s;"><img src="assets/falling-souls/soul-07.png" alt=""></span>
+    <span class="descent-soul" style="--x:88vw;--size:112px;--delay:.52s;--tilt:-35deg;--rot:45deg;--spin:570deg;--drift:-20vw;--alpha:.66;--flail:1s;--blur:.2px;"><img src="assets/falling-souls/soul-08.png" alt=""></span>
+    <span class="descent-soul" style="--x:96vw;--size:136px;--delay:.86s;--tilt:55deg;--rot:-35deg;--spin:-720deg;--drift:-27vw;--alpha:.54;--flail:.68s;--blur:.45px;"><img src="assets/falling-souls/soul-09.png" alt=""></span>
+    <span class="descent-soul" style="--x:43vw;--size:76px;--delay:1.05s;--tilt:18deg;--rot:120deg;--spin:420deg;--drift:3vw;--alpha:.28;--flail:.8s;--blur:.7px;"><img src="assets/falling-souls/soul-05.png" alt=""></span>
+    <span class="descent-soul" style="--x:58vw;--size:68px;--delay:1.28s;--tilt:-22deg;--rot:-100deg;--spin:-380deg;--drift:-4vw;--alpha:.22;--flail:.86s;--blur:.9px;"><img src="assets/falling-souls/soul-10.png" alt=""></span>
+    <div class="descent-title">Hell's Tales</div>
+  </div>
   <canvas id="embers" aria-hidden="true"></canvas>
   <canvas id="inferno" aria-hidden="true"></canvas>
   <div class="hell-fog" aria-hidden="true"></div>
@@ -706,6 +915,7 @@
     <nav>
       <a class="nav-btn" href="#stories">Stories</a>
       <a class="nav-btn" href="#tome">Read</a>
+      <a class="nav-btn" href="#holidays">Holidays</a>
       <a class="nav-btn" href="#doctrine">The Doctrine</a>
       <a class="nav-btn" href="#accused">The Accused</a>
       <a class="nav-btn" href="#archive">Archive</a>
@@ -734,42 +944,42 @@
       </p>
 
       <div class="story-grid">
-        <article class="story-card" data-number="I">
+        <a class="story-card" data-number="I" href="stories/the-bargain.html">
           <div class="sigil">⛧</div>
           <h3>The Bargain</h3>
           <p>A desperate soul comes to Hell expecting a monster and instead finds a negotiator who remembers every promise the living world made and quietly broke.</p>
           <div class="story-meta">Temptation · Free Will · Consequence</div>
-        </article>
-        <article class="story-card" data-number="II">
+        </a>
+        <a class="story-card" data-number="II" href="stories/the-pious.html">
           <div class="sigil">♱</div>
           <h3>The Pious</h3>
           <p>A revered religious leader builds a public life around salvation while privately weaponizing fear, shame, and obedience. Death finally introduces him to the people he condemned.</p>
           <div class="story-meta">Hypocrisy · Power · Judgment</div>
-        </article>
-        <article class="story-card" data-number="III">
+        </a>
+        <a class="story-card" data-number="III" href="stories/the-accuser.html">
           <div class="sigil">☿</div>
           <h3>The Accuser</h3>
           <p>Satan is called to answer for humanity's corruption, but the evidence begins to suggest that mankind required very little help—and that Heaven may have reasons for maintaining the old story.</p>
           <div class="story-meta">Satan · Blame · Rebellion</div>
-        </article>
-        <article class="story-card" data-number="IV">
+        </a>
+        <a class="story-card" data-number="IV" href="stories/the-tribunal.html">
           <div class="sigil">⚖</div>
           <h3>The Tribunal</h3>
           <p>A dead congregation arrives expecting reward. Instead, every prayer, donation, exclusion, confession, and act of cruelty is entered into a court where labels of believer and sinner carry no weight.</p>
           <div class="story-meta">Faith · Justice · Accountability</div>
-        </article>
-        <article class="story-card" data-number="V">
+        </a>
+        <a class="story-card" data-number="V" href="stories/the-furnace-gospel.html">
           <div class="sigil">🔥</div>
           <h3>The Furnace Gospel</h3>
           <p>A forbidden scripture surfaces claiming Hell was never built as a torture chamber but transformed into one by centuries of human fear, doctrine, and political necessity.</p>
           <div class="story-meta">Doctrine · Fear · Revision</div>
-        </article>
-        <article class="story-card" data-number="VI">
+        </a>
+        <a class="story-card" data-number="VI" href="stories/the-last-sermon.html">
           <div class="sigil">☠</div>
           <h3>The Last Sermon</h3>
           <p>On the final night of his life, a preacher is visited by the Devil he spent forty years describing from the pulpit. The visitor has corrections.</p>
           <div class="story-meta">Reputation · Truth · Reckoning</div>
-        </article>
+        </a>
       </div>
     </section>
 
@@ -942,20 +1152,54 @@
       </div>
     </section>
 
+    <section class="section" id="holidays">
+      <h2 class="section-title">Infernal Holidays</h2>
+      <p class="section-sub">
+        Hell is known for its holidays. Across the infernal calendar, ancient observances mark moments of rebellion, judgment, loss, remembrance, and defiance. Some commemorate events older than human history; others preserve traditions carried into Hell by the countless souls who have passed through its gates. Together, they form a calendar shaped by the history of the condemned—and by a realm determined to remember the stories Heaven would rather forget.
+      </p>
+      <div class="holiday-stage">
+        <article class="holiday-feature" id="monthlyHoliday">
+          <div class="holiday-date">Consulting the infernal calendar...</div>
+          <h3>Monthly Rite Loading</h3>
+          <p>The current month will appear here.</p>
+        </article>
+        <aside class="holiday-active">
+          <div class="holiday-date">Active Now</div>
+          <h3>Today's Fires</h3>
+          <div class="holiday-active-list" id="activeHolidays">
+            <p class="holiday-empty">Checking the ashes for today's observances...</p>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="section" id="holiday-directory">
+      <h2 class="section-title">Infernal Holiday Directory</h2>
+      <p class="section-sub">
+        Browse every known feast, remembrance, rebellion, joke, argument, and ritual in the Hell's Tales calendar. Each holiday links to a description page with the date, type, meaning, and site-use notes.
+      </p>
+      <div class="holiday-directory-grid" id="holidayDirectory"></div>
+      <div class="holiday-controls" aria-label="Infernal holiday directory pagination">
+        <button class="tome-control" type="button" id="prevHolidayPage">← Previous Holidays</button>
+        <div class="holiday-status" id="holidayPageStatus" aria-live="polite">Holidays 1–6</div>
+        <button class="tome-control" type="button" id="nextHolidayPage">Next Holidays →</button>
+      </div>
+    </section>
+
     <section class="section" id="archive">
       <h2 class="section-title">Infernal Archive</h2>
       <p class="section-sub">
         A Hell's Tales story world needs more than individual episodes. This archive is designed for the mythology behind the anthology and can grow as new stories are released.
       </p>
       <div class="archive-grid">
-        <a class="archive-link" href="story-index.html"><article class="archive-card"><h4>Story Index</h4><p>Browse tales by issue, chronology, theme, narrator, location, or circle of Hell.</p></article></a>
-        <a class="archive-link" href="characters.html"><article class="archive-card"><h4>Characters</h4><p>Dossiers for Satan, demons, clergy, sinners, saints, angels, judges, witnesses, and recurring mortals.</p></article></a>
-        <a class="archive-link" href="infernal-geography.html"><article class="archive-card"><h4>Infernal Geography</h4><p>Maps and descriptions of Hell, its courts, gates, cities, wastelands, prisons, sanctuaries, and forbidden borders.</p></article></a>
-        <a class="archive-link" href="forbidden-texts.html"><article class="archive-card"><h4>Forbidden Texts</h4><p>In-world scriptures, sermons, contracts, confessions, trial records, prophecies, and contradictory accounts.</p></article></a>
-        <a class="archive-link" href="symbols-relics.html"><article class="archive-card"><h4>Symbols &amp; Relics</h4><p>Recurring sigils, sacred objects, cursed artifacts, keys, seals, weapons, and objects whose meanings change by narrator.</p></article></a>
-        <a class="archive-link" href="heavens-record.html"><article class="archive-card"><h4>Heaven's Record</h4><p>The official version of events—when available—and the places where that version conflicts with testimony from below.</p></article></a>
-        <a class="archive-link" href="creator-notes.html"><article class="archive-card"><h4>Creator Notes</h4><p>Commentary on themes, symbolism, influences, visual direction, and the questions each story is designed to provoke.</p></article></a>
-        <a class="archive-link" href="coming-damnations.html"><article class="archive-card"><h4>Coming Damnations</h4><p>Previews, cover reveals, release announcements, teasers, and glimpses of the next descent.</p></article></a>
+        <a class="archive-link" href="archive/story-index.html"><article class="archive-card"><h4>Story Index</h4><p>Browse tales by issue, chronology, theme, narrator, location, or circle of Hell.</p></article></a>
+        <a class="archive-link" href="archive/characters.html"><article class="archive-card"><h4>Characters</h4><p>Dossiers for Satan, demons, clergy, sinners, saints, angels, judges, witnesses, and recurring mortals.</p></article></a>
+        <a class="archive-link" href="archive/infernal-geography.html"><article class="archive-card"><h4>Infernal Geography</h4><p>Maps and descriptions of Hell, its courts, gates, cities, wastelands, prisons, sanctuaries, and forbidden borders.</p></article></a>
+        <a class="archive-link" href="archive/forbidden-texts.html"><article class="archive-card"><h4>Forbidden Texts</h4><p>In-world scriptures, sermons, contracts, confessions, trial records, prophecies, and contradictory accounts.</p></article></a>
+        <a class="archive-link" href="archive/symbols-relics.html"><article class="archive-card"><h4>Symbols &amp; Relics</h4><p>Recurring sigils, sacred objects, cursed artifacts, keys, seals, weapons, and objects whose meanings change by narrator.</p></article></a>
+        <a class="archive-link" href="archive/heavens-record.html"><article class="archive-card"><h4>Heaven's Record</h4><p>The official version of events—when available—and the places where that version conflicts with testimony from below.</p></article></a>
+        <a class="archive-link" href="archive/creator-notes.html"><article class="archive-card"><h4>Creator Notes</h4><p>Commentary on themes, symbolism, influences, visual direction, and the questions each story is designed to provoke.</p></article></a>
+        <a class="archive-link" href="archive/coming-damnations.html"><article class="archive-card"><h4>Coming Damnations</h4><p>Previews, cover reveals, release announcements, teasers, and glimpses of the next descent.</p></article></a>
       </div>
     </section>
 
@@ -985,7 +1229,94 @@
     <span>Every judgment has a witness. Every gospel has an editor.</span>
   </footer>
 
+  <script src="assets/datasets/infernal-holidays.js"></script>
   <script>
+    const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const descentIntro = document.querySelector('.descent-intro');
+    const shouldPlayDescent = !prefersReducedMotion && !window.location.hash;
+    if (!shouldPlayDescent) {
+      document.body.classList.remove('descent-active');
+      descentIntro?.remove();
+    } else {
+      window.scrollTo(0, 0);
+      window.setTimeout(() => {
+        document.body.classList.remove('descent-active');
+        descentIntro?.remove();
+      }, 5350);
+    }
+
+    function populateInfernalHolidays(today = new Date()) {
+      const data = window.INFERNAL_HOLIDAYS;
+      const monthlyHoliday = document.getElementById('monthlyHoliday');
+      const activeHolidays = document.getElementById('activeHolidays');
+      const holidayDirectory = document.getElementById('holidayDirectory');
+      const prevHolidayPage = document.getElementById('prevHolidayPage');
+      const nextHolidayPage = document.getElementById('nextHolidayPage');
+      const holidayPageStatus = document.getElementById('holidayPageStatus');
+      if (!data || !monthlyHoliday || !activeHolidays || !holidayDirectory) return;
+
+      const currentMonth = today.getMonth() + 1;
+      const currentDay = today.getDate();
+      const holidaysPerPage = 6;
+      let holidayPage = 0;
+      const monthFeature = data.monthly.find(item => item.monthNumber === currentMonth);
+      const holidaysThisMonth = data.holidays.filter(item => item.monthNumber === currentMonth);
+      const active = holidaysThisMonth.filter(item => currentDay >= item.day && currentDay < item.day + (item.durationDays || 1));
+
+      if (monthFeature) {
+        const featured = data.holidays.find(item => item.slug === monthFeature.featuredSlug) || holidaysThisMonth[0];
+        monthlyHoliday.innerHTML = `
+          <div class="holiday-date">${monthFeature.Month} · Monthly Rite</div>
+          <h3>${monthFeature['Primary Featured Holiday']}</h3>
+          <p>${monthFeature['Suggested Site Theme']}</p>
+          <p>${monthFeature.featuredDescription || featured?.Description || ''}</p>
+          <a class="cta" href="${monthFeature.featuredUrl || featured?.url || '#holiday-directory'}">Open the Rite →</a>
+        `;
+      }
+
+      activeHolidays.innerHTML = active.length
+        ? active.map(item => `
+            <article class="holiday-mini">
+              <div class="holiday-date">${item.Date} · ${item.Type}</div>
+              <h4>${item.Holiday}</h4>
+              <p>${item.Description}</p>
+              <a class="cta" href="${item.url}">Read the Holiday →</a>
+            </article>
+          `).join('')
+        : `<p class="holiday-empty">No dated rite is active today. The ${monthFeature?.Month || 'current'} monthly celebration remains lit above.</p>`;
+
+      const renderHolidayPage = () => {
+        const totalPages = Math.max(1, Math.ceil(data.holidays.length / holidaysPerPage));
+        holidayPage = Math.min(Math.max(holidayPage, 0), totalPages - 1);
+        const start = holidayPage * holidaysPerPage;
+        const visibleHolidays = data.holidays.slice(start, start + holidaysPerPage);
+        holidayDirectory.innerHTML = visibleHolidays.map(item => `
+          <a class="holiday-card" href="${item.url}">
+            <div class="holiday-date">${item.Date} · ${item.Type}</div>
+            <h4>${item.Holiday}</h4>
+            <p>${item.Description}</p>
+          </a>
+        `).join('');
+        if (holidayPageStatus) {
+          const end = Math.min(start + visibleHolidays.length, data.holidays.length);
+          holidayPageStatus.textContent = `Holidays ${start + 1}–${end} of ${data.holidays.length}`;
+        }
+        if (prevHolidayPage) prevHolidayPage.disabled = holidayPage === 0;
+        if (nextHolidayPage) nextHolidayPage.disabled = holidayPage >= totalPages - 1;
+      };
+
+      prevHolidayPage?.addEventListener('click', () => {
+        holidayPage -= 1;
+        renderHolidayPage();
+      });
+      nextHolidayPage?.addEventListener('click', () => {
+        holidayPage += 1;
+        renderHolidayPage();
+      });
+      renderHolidayPage();
+    }
+    populateInfernalHolidays();
+
     // Rising embers
     const emberCanvas = document.getElementById('embers');
     const ectx = emberCanvas.getContext('2d');
@@ -1278,7 +1609,7 @@
     const hellAmbientAudio = document.getElementById('hellAmbientAudio');
     if (hellAmbientAudio) {
       hellAmbientAudio.loop = true;
-      hellAmbientAudio.volume = 1.0;
+      hellAmbientAudio.volume = 0.28;
 
       const startHellAudio = () => {
         const attempt = hellAmbientAudio.play();

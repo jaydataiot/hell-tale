@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Furnace Gospel | Hell's Tales</title>
+  <link rel="stylesheet" href="../archive.css">
+</head>
+<body>
+  <div class="embers"></div>
+  <header class="site-head">
+    <a class="brand" href="../hells-tales.html">Hell's Tales</a>
+    <nav class="head-links">
+      <a href="../hells-tales.html#stories">Tales</a>
+      <a href="../archive/story-index.html">Archive</a>
+      <a href="../hells-tales.html#about">About</a>
+    </nav>
+  </header>
+
+  <section class="story-hero">
+    <div class="story-hero-inner">
+      <div class="eyebrow">Tales From Below · Tale V</div>
+      <h1>The Furnace Gospel</h1>
+      <p>A forbidden scripture claims Hell was never built as a torture chamber, but transformed into one by centuries of human fear.</p>
+    </div>
+  </section>
+
+  <main class="story-page-shell">
+    <div class="story-stage">
+      <article class="story-manuscript">
+        <div class="chapter-mark">First Descent</div>
+        <div class="story-body">
+          <p>The book was found inside a furnace that had not burned out in nine hundred years. Its pages were thin as onion skin, black at the edges, and warm enough to blister anyone who opened it without permission.</p>
+          <p>Permission, according to the first page, could only be granted by someone willing to lose certainty.</p>
+          <p>The monk who discovered it had spent his life copying approved terrors: pits, hooks, screams, punishments arranged with the tidy imagination of men who had never doubted their own salvation. This text was different. It did not threaten. It mourned.</p>
+          <p>On the second page, written in a language older than guilt, the monk found a sentence that ruined him: Hell was not made for pain. Hell was made for truth.</p>
+          <p>To be continued...</p>
+        </div>
+      </article>
+      <aside class="story-aside">
+        <div class="story-relic"><div class="sigil">🔥</div><h2>Doctrine</h2><p>Some scriptures are buried because they are false. Others because they are useful.</p></div>
+        <div class="story-relic"><h2>Archive Note</h2><p>A forbidden gospel, marginal corrections, and the politics of eternal fire.</p></div>
+      </aside>
+    </div>
+    <nav class="story-return"><a class="button" href="the-tribunal.html">Previous Tale</a><a class="button" href="the-last-sermon.html">Next Tale</a></nav>
+  </main>
+
+  <audio id="hellStoryAudio" src="../assets/audio/hell-lava.mp3" autoplay loop preload="metadata" playsinline></audio>
+  <script>
+    (()=>{const audio=document.getElementById('hellStoryAudio');audio.volume=.34;const play=()=>audio.play().catch(()=>{});play();['pointerdown','keydown','touchstart'].forEach((eventName)=>window.addEventListener(eventName,play,{once:true,passive:true}));})();
+  </script>
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Pious | Hell's Tales</title>
+  <link rel="stylesheet" href="../archive.css">
+</head>
+<body>
+  <div class="embers"></div>
+  <header class="site-head">
+    <a class="brand" href="../hells-tales.html">Hell's Tales</a>
+    <nav class="head-links">
+      <a href="../hells-tales.html#stories">Tales</a>
+      <a href="../archive/story-index.html">Archive</a>
+      <a href="../hells-tales.html#about">About</a>
+    </nav>
+  </header>
+
+  <section class="story-hero">
+    <div class="story-hero-inner">
+      <div class="eyebrow">Tales From Below · Tale II</div>
+      <h1>The Pious</h1>
+      <p>A revered religious leader builds a public life around salvation while privately weaponizing fear, shame, and obedience.</p>
+    </div>
+  </section>
+
+  <main class="story-page-shell">
+    <div class="story-stage">
+      <article class="story-manuscript">
+        <div class="chapter-mark">First Descent</div>
+        <div class="story-body">
+          <p>The bishop died beneath a ceiling painted with angels. His followers filled the cathedral before dawn, weeping into silk handkerchiefs and calling his name as if sound could pull a soul upward.</p>
+          <p>He smiled when the light came for him. He had rehearsed that smile for forty years: calm, humble, certain. It lasted until the light changed color.</p>
+          <p>There was no choir waiting below. Only a corridor made from church doors, each one carved with the face of someone he had corrected, shamed, exiled, silenced, or used. Their mouths moved without sound. Their eyes followed him.</p>
+          <p>At the end of the corridor, a small clerk dipped a pen into a bowl of flame and said, "State your name as you gave it to the poor, not as you printed it on the building."</p>
+          <p>To be continued...</p>
+        </div>
+      </article>
+      <aside class="story-aside">
+        <div class="story-relic"><div class="sigil">♱</div><h2>Hypocrisy</h2><p>Sanctity is easiest to counterfeit when everyone is taught not to question it.</p></div>
+        <div class="story-relic"><h2>Archive Note</h2><p>Witness testimony from the condemned pews and the chambers behind the pulpit.</p></div>
+      </aside>
+    </div>
+    <nav class="story-return"><a class="button" href="the-bargain.html">Previous Tale</a><a class="button" href="the-accuser.html">Next Tale</a></nav>
+  </main>
+
+  <audio id="hellStoryAudio" src="../assets/audio/hell-lava.mp3" autoplay loop preload="metadata" playsinline></audio>
+  <script>
+    (()=>{const audio=document.getElementById('hellStoryAudio');audio.volume=.34;const play=()=>audio.play().catch(()=>{});play();['pointerdown','keydown','touchstart'].forEach((eventName)=>window.addEventListener(eventName,play,{once:true,passive:true}));})();
+  </script>
+</body>
+</html>

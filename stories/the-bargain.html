@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>The Bargain | Hell's Tales</title>
+  <link rel="stylesheet" href="../archive.css">
+</head>
+<body>
+  <div class="embers"></div>
+  <header class="site-head">
+    <a class="brand" href="../hells-tales.html">Hell's Tales</a>
+    <nav class="head-links">
+      <a href="../hells-tales.html#stories">Tales</a>
+      <a href="../archive/story-index.html">Archive</a>
+      <a href="../hells-tales.html#about">About</a>
+    </nav>
+  </header>
+
+  <section class="story-hero">
+    <div class="story-hero-inner">
+      <div class="eyebrow">Tales From Below · Tale I</div>
+      <h1>The Bargain</h1>
+      <p>A desperate soul comes to Hell expecting a monster and instead finds a negotiator who remembers every promise the living world made and quietly broke.</p>
+    </div>
+  </section>
+
+  <main class="story-page-shell">
+    <div class="story-stage">
+      <article class="story-manuscript">
+        <div class="chapter-mark">First Descent</div>
+        <div class="story-body">
+          <p>The man arrived in Hell with his hands still folded from prayer. He kept them that way while the ash fell on his knuckles, while the gate breathed open, while the first scream rolled across the valley like iron dragged over stone.</p>
+          <p>He had expected claws. He had expected horns. He had expected a beast delighted by his panic. Instead, the figure waiting for him wore a black suit cut too well for any country on earth and held a ledger bound in something that looked almost, but not quite, like leather.</p>
+          <p>"You asked for mercy at the end," the figure said. "That is common. What interests us is what you asked for before the end."</p>
+          <p>The man's mouth went dry. Behind the negotiator, millions of names glowed in columns of red script, each one linked to a promise, each promise linked to a price.</p>
+          <p>To be continued...</p>
+        </div>
+      </article>
+      <aside class="story-aside">
+        <div class="story-relic"><div class="sigil">⛧</div><h2>Temptation</h2><p>No soul is dragged where it never agreed to go. Hell keeps receipts.</p></div>
+        <div class="story-relic"><h2>Archive Note</h2><p>Contract fragments, broken vows, and the legal grammar of damnation.</p></div>
+      </aside>
+    </div>
+    <nav class="story-return"><a class="button" href="../hells-tales.html#stories">Back to Tales</a><a class="button" href="the-pious.html">Next Tale</a></nav>
+  </main>
+
+  <audio id="hellStoryAudio" src="../assets/audio/hell-lava.mp3" autoplay loop preload="metadata" playsinline></audio>
+  <script>
+    document.querySelectorAll('[data-year]').forEach((node)=>{node.textContent=new Date().getFullYear()});
+    (()=>{const audio=document.getElementById('hellStoryAudio');audio.volume=.34;const play=()=>audio.play().catch(()=>{});play();['pointerdown','keydown','touchstart'].forEach((eventName)=>window.addEventListener(eventName,play,{once:true,passive:true}));})();
+  </script>
+</body>
+</html>
