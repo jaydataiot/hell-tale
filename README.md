@@ -1,5 +1,5 @@
 # hell-tale
-location: www.hellstales.com
+location: https://hellstales.com
 
 # Hell's Tales
 
