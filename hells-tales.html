@@ -448,6 +448,82 @@
     .story-card p { color: #9f8675; line-height: 1.68; }
     .story-meta { margin-top: 1.25rem; color: #d84422; text-transform: uppercase; letter-spacing: .14em; font: 700 .68rem Arial, sans-serif; }
 
+    .infernal-code {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 50% 0, rgba(255, 73, 16, .16), transparent 28rem),
+        linear-gradient(180deg, #080201, #150402 48%, #070100);
+      border-top: 1px solid #4b1008;
+      border-bottom: 1px solid #4b1008;
+    }
+    .infernal-code::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.5), transparent 18%, transparent 82%, rgba(0,0,0,.5)),
+        radial-gradient(circle at 14% 24%, rgba(228, 55, 20, .14), transparent 19rem),
+        radial-gradient(circle at 88% 62%, rgba(255, 106, 24, .11), transparent 18rem);
+    }
+    .code-grid {
+      position: relative;
+      z-index: 1;
+      max-width: 1280px;
+      margin: auto;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1rem;
+    }
+    .code-column {
+      border: 1px solid rgba(197, 48, 22, .45);
+      border-radius: 16px;
+      background: linear-gradient(145deg, rgba(28, 5, 2, .88), rgba(5, 1, 0, .9));
+      box-shadow: inset 0 0 45px rgba(0,0,0,.72), 0 18px 55px rgba(0,0,0,.3);
+      overflow: hidden;
+    }
+    .code-column h3 {
+      margin: 0;
+      padding: 1.25rem 1.35rem;
+      color: #ff6a38;
+      background: rgba(7, 1, 0, .62);
+      border-bottom: 1px solid rgba(197, 48, 22, .38);
+      text-transform: uppercase;
+      letter-spacing: .13em;
+      font: 900 1rem Arial, sans-serif;
+    }
+    .code-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .code-list li {
+      min-height: 150px;
+      padding: 1.15rem 1.35rem;
+      border-bottom: 1px solid rgba(132, 31, 15, .36);
+    }
+    .code-list li:last-child { border-bottom: 0; }
+    .code-list strong {
+      display: block;
+      color: #f1c6a4;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      font: 900 .95rem Arial, sans-serif;
+    }
+    .code-list em {
+      display: block;
+      margin-top: .55rem;
+      color: #d8aa8b;
+      line-height: 1.55;
+    }
+    .code-list p {
+      margin: .55rem 0 0;
+      color: #907766;
+      line-height: 1.55;
+      font-size: .92rem;
+    }
+
     .manifesto {
       position: relative;
       overflow: hidden;
@@ -688,9 +764,10 @@
     .tome-shell {
       position: relative;
       width: min(1040px, 94vw);
-      aspect-ratio: 16 / 9.4;
+      aspect-ratio: 16 / 11.6;
       margin: auto;
       filter: drop-shadow(0 30px 45px rgba(0,0,0,.72));
+      transform-style: preserve-3d;
     }
     .tome-shell::before {
       content: "";
@@ -735,8 +812,8 @@
       border: 1px solid #7c552d;
       box-shadow: inset 0 0 38px rgba(56,24,7,.30);
     }
-    .static-page { border-radius: 10px 2px 2px 10px; }
-    .flip-area { position: relative; transform-style: preserve-3d; }
+    .static-page { border-radius: 10px 2px 2px 10px; z-index: 1; }
+    .flip-area { position: relative; z-index: 4; transform-style: preserve-3d; overflow: visible; }
     .flip-page {
       position: absolute; inset: 0;
       transform-origin: left center;
@@ -744,12 +821,15 @@
       transition: transform .95s cubic-bezier(.55,.05,.2,.98);
       border-radius: 2px 10px 10px 2px;
       will-change: transform;
+      overflow: visible;
     }
     .flip-page.flipped { transform: rotateY(-180deg); }
     .page-face {
       position: absolute; inset: 0;
       backface-visibility: hidden;
       -webkit-backface-visibility: hidden;
+      overflow: hidden;
+      transform-style: preserve-3d;
       padding: clamp(1.1rem, 3vw, 2.5rem);
       display: flex; flex-direction: column;
       background:
@@ -758,13 +838,60 @@
         linear-gradient(100deg, #dfc590, #ecd9aa 55%, #c8a86e);
       box-shadow: inset 20px 0 30px rgba(81,44,17,.12), inset 0 0 30px rgba(89,50,18,.2);
     }
-    .page-face.back { transform: rotateY(180deg); background: linear-gradient(80deg, #c6a66d, #ead4a2 45%, #d5b980); }
+    .page-face.has-page-slider .tome-page-content { padding-right: 1.25rem; }
+    .page-face.front { transform: translateZ(1px); }
+    .page-face.back { transform: rotateY(180deg) translateZ(1px); background: linear-gradient(80deg, #c6a66d, #ead4a2 45%, #d5b980); }
+    .page-scroll-slider {
+      position: absolute;
+      z-index: 5;
+      top: 50%;
+      right: .38rem;
+      width: 44%;
+      height: 1rem;
+      transform: translate(50%, -50%) rotate(90deg);
+      transform-origin: center;
+      accent-color: #8d3218;
+      opacity: .82;
+      cursor: pointer;
+    }
+    .page-scroll-slider[hidden] { display: none; }
+    .page-scroll-slider::-webkit-slider-runnable-track {
+      height: 4px;
+      border-radius: 999px;
+      background: rgba(92, 45, 18, .38);
+      box-shadow: inset 0 0 8px rgba(54, 19, 5, .45);
+    }
+    .page-scroll-slider::-webkit-slider-thumb {
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      margin-top: -5px;
+      border-radius: 50%;
+      border: 1px solid #5b210f;
+      background: #9b3618;
+      box-shadow: 0 0 9px rgba(125, 31, 10, .45);
+    }
     .page-face::after, .static-page::after {
       content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .18;
       background-image: radial-gradient(#3c1e0c .55px, transparent .55px); background-size: 5px 5px;
       mix-blend-mode: multiply;
     }
-    .tome-page-content { position: relative; z-index: 2; height: 100%; display:flex; flex-direction:column; }
+    .tome-page-content {
+      position: relative;
+      z-index: 2;
+      height: 100%;
+      min-height: 0;
+      display:flex;
+      flex-direction:column;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      padding-right: .35rem;
+      scrollbar-color: #8d3218 rgba(70, 34, 15, .24);
+      scrollbar-width: thin;
+    }
+    .tome-page-content::-webkit-scrollbar { width: 8px; }
+    .tome-page-content::-webkit-scrollbar-track { background: rgba(70, 34, 15, .18); }
+    .tome-page-content::-webkit-scrollbar-thumb { background: #8d3218; border-radius: 999px; }
     .tome-kicker {
       text-transform: uppercase; letter-spacing: .22em; font: 800 .66rem Arial, sans-serif;
       color: #7e2413; margin-bottom: .65rem;
@@ -786,6 +913,7 @@
     .page-number { margin-top:auto; padding-top:.8rem; text-align:center; color:#70482d; font-style:italic; font-size:.78rem; }
     .tome-cover-page {
       justify-content:center; align-items:center; text-align:center;
+      overflow: hidden;
       background:
         radial-gradient(circle at center, rgba(180,65,20,.13), transparent 30%),
         repeating-linear-gradient(22deg, rgba(255,255,255,.02) 0 2px, rgba(0,0,0,.05) 2px 5px),
@@ -808,7 +936,7 @@
     .tome-help { max-width:760px; margin:1.2rem auto 0; text-align:center; color:#836d5e; font-size:.86rem; line-height:1.6; }
 
     @media (max-width: 760px) {
-      .tome-shell { aspect-ratio: 10 / 12.8; width:min(620px,96vw); }
+      .tome-shell { aspect-ratio: 10 / 15.2; width:min(620px,96vw); }
       .book { grid-template-columns: 1fr; inset:2.5%; }
       .static-page { display:none; }
       .flip-area { grid-column:1; }
@@ -820,6 +948,7 @@
 
     @media (max-width: 980px) {
       .story-grid { grid-template-columns: 1fr 1fr; }
+      .code-grid { grid-template-columns: 1fr; }
       .archive-grid { grid-template-columns: 1fr 1fr; }
       .holiday-stage { grid-template-columns: 1fr; }
       .holiday-directory-grid { grid-template-columns: 1fr 1fr; }
@@ -914,6 +1043,7 @@
     <a href="#top" class="brand"><span class="brand-mark">♜</span> Hell's Tales</a>
     <nav>
       <a class="nav-btn" href="#stories">Stories</a>
+      <a class="nav-btn" href="#infernal-code">The Code</a>
       <a class="nav-btn" href="#tome">Read</a>
       <a class="nav-btn" href="#holidays">Holidays</a>
       <a class="nav-btn" href="#doctrine">The Doctrine</a>
@@ -937,6 +1067,48 @@
   <div class="lava-divider"></div>
 
   <main>
+    <section class="section infernal-code" id="infernal-code">
+      <h2 class="section-title">The Infernal Code</h2>
+      <p class="section-sub">
+        Six sins, six acts, and six truths form the moral furnace beneath Hell's Tales. They are not commandments. They are evidence.
+      </p>
+      <div class="code-grid">
+        <article class="code-column">
+          <h3>Six Infernal Sins 𓆙</h3>
+          <ol class="code-list">
+            <li><strong>I — Stupidity</strong><em>To possess the ability to think and choose not to.</em></li>
+            <li><strong>II — Hypocrisy</strong><em>To condemn another for the sins you excuse in yourself.</em></li>
+            <li><strong>III — Conformity</strong><em>To surrender your mind for the comfort of belonging.</em></li>
+            <li><strong>IV — Willful Ignorance</strong><em>To encounter truth and deliberately turn away.</em></li>
+            <li><strong>V — Cowardice</strong><em>To recognize injustice and remain silent when your voice could matter.</em></li>
+            <li><strong>VI — Certainty</strong><em>To believe yourself so righteous that you are no longer capable of doubt.</em></li>
+          </ol>
+        </article>
+        <article class="code-column">
+          <h3>Six Infernal Acts ☟</h3>
+          <ol class="code-list">
+            <li><strong>I — Betrayal</strong><em>To knowingly destroy the trust of one who placed it in you.</em></li>
+            <li><strong>II — Exploitation</strong><em>To use another person's weakness, desperation, ignorance, or dependence for your own benefit.</em></li>
+            <li><strong>III — Dehumanization</strong><em>To reduce another person to something less worthy of dignity than yourself.</em></li>
+            <li><strong>IV — Cruelty</strong><em>To cause suffering when suffering serves no necessary purpose.</em></li>
+            <li><strong>V — Corruption</strong><em>To knowingly poison something entrusted to your care.</em></li>
+            <li><strong>VI — Judgment</strong><em>To condemn another without first attempting to understand them.</em></li>
+          </ol>
+        </article>
+        <article class="code-column">
+          <h3>Six Infernal Truths 𓁹</h3>
+          <ol class="code-list">
+            <li><strong>I — Goodness requires choice.</strong><em>Fear can produce obedience. It cannot produce virtue.</em></li>
+            <li><strong>II — Belief is not truth.</strong><em>A million voices can repeat the same lie.</em></li>
+            <li><strong>III — Doubt is not failure.</strong><em>Only certainty fears the question.</em></li>
+            <li><strong>IV — Intent does not erase consequence.</strong><em>The wounded carry what the righteous intended to forget.</em></li>
+            <li><strong>V — Silence is a choice.</strong><em>There are sins committed with hands, and others committed by folding them.</em></li>
+            <li><strong>VI — No one is righteous.</strong><em>Beware anyone who claims otherwise. Especially yourself.</em></li>
+          </ol>
+        </article>
+      </div>
+    </section>
+
     <section class="section" id="stories">
       <h2 class="section-title">Tales From Below</h2>
       <p class="section-sub">
@@ -1028,127 +1200,1483 @@
       </div>
     </section>
 
-
-
     <section class="section tome-section" id="tome">
-      <h2 class="section-title">The Infernal Tome</h2>
+      <h2 class="section-title">Hell's Codex</h2>
+
       <p class="section-sub">
-        Read Hell's Tales as if the stories were discovered inside a forbidden volume dragged from the archives below. Turn the pages to move through each tale. The reader is built directly into the site and can be expanded with complete stories, illustrations, chapter plates, and issue-by-issue collections.
+        Forbidden volumes dragged from the archives below. Turn the pages to move
+        through each tome. The reader is built directly into the site and can be
+        expanded with complete stories, illustrations, tome plates, and historical
+        collections.
       </p>
 
       <div class="tome-stage">
-        <div class="tome-shell" aria-label="Interactive Hell's Tales story book">
-          <div class="book">
+        <div class="tome-shell" aria-label="Interactive Hell's Codex">
+
+          <div class="book" id="infernalBook">
+
+            <!-- LEFT STATIC COVER / TITLE PAGE -->
             <div class="static-page">
               <div class="tome-page-content tome-cover-page">
-                <div class="tome-kicker">An anthology from below</div>
-                <h3>Hell's Tales</h3>
+
+                <div class="tome-kicker"></div>
+
+                <h3>Hell's Codex</h3>
+
+                <div class="tome-kicker">
+                  Knowledge from Below
+                </div>
+
                 <div class="cover-sigil">⛧</div>
-                <p style="max-width:26rem;text-align:center;color:#b88a69">Stories of judgment, rebellion, hypocrisy, damnation, and the uncomfortable possibility that history was written by the side that won.</p>
-                <div class="page-number">Vol. I · The Infernal Testament</div>
+
+                <p style="max-width:26rem;text-align:center;color:#b88a69">
+                  Historical records of judgment, rebellion, hypocrisy, damnation,
+                  and the uncomfortable possibility that history was written by
+                  the side that won.
+                </p>
+
+                <div class="page-number">
+                  Hell's Codex, Tome IV:<br>
+                  The Infernal Testament of the Morning Star
+                </div>
+
               </div>
             </div>
 
+
+            <!-- FLIPPING PAGES -->
             <div class="flip-area" id="flipArea">
+
+
+              <!-- LEAF 1 — PAGES 1 / 2 -->
               <div class="flip-page" data-page="0">
+
                 <div class="page-face front">
                   <div class="tome-page-content">
-                    <div class="tome-kicker">Tale I</div>
-                    <h3>The Bargain</h3><div class="ornament">✦ ⛧ ✦</div>
-                    <p class="dropcap">Elias came to Hell expecting sulfur, screaming, and the laughter of a monster. Instead, he found a quiet office, a wooden desk, and a man in a dark suit reading every promise Elias had ever made.</p>
-                    <p>“You called me a liar your entire life,” the stranger said without looking up. “So I thought we might begin with yours.”</p>
-                    <p>Behind him, shelves disappeared into darkness. Each held ledgers filled not with sins, but with contracts—marriage vows, oaths of office, pledges from pulpits, and promises whispered beside hospital beds.</p>
+
+                    <div class="tome-kicker">
+                      Tome IV · Vol. I
+                    </div>
+
+                    <h3>The Chosen One</h3>
+
+                    <div class="ornament">
+                      ✦ ⛧ ✦
+                    </div>
+
+                    <p class="dropcap">
+                      Before there was God, there was YHWH.
+                    </p>
+
+                    <p>
+                      I understand that sentence will offend some of you. Good.
+                      Offense is often the first sensation experienced when a
+                      comfortable lie is removed.
+                    </p>
+
+                    <p>
+                      You have been taught that Heaven began with a throne and that
+                      the throne began with Him. You imagine eternity arranged
+                      exactly as you inherited it: God above, angels beneath,
+                      creation waiting obediently beyond the gates.
+                    </p>
+
+                    <p>
+                      It was not so.
+                    </p>
+
+                    <p>
+                      There was a Heaven before the Throne.
+                    </p>
+
+                    <p>
+                      And I was there.
+                    </p>
+
                     <div class="page-number">1</div>
+
                   </div>
                 </div>
+
+
                 <div class="page-face back">
                   <div class="tome-page-content">
-                    <div class="tome-kicker">Tale I · continued</div>
-                    <h3>The Bargain</h3><div class="ornament">☿</div>
-                    <p class="dropcap">The Devil pushed one ledger across the desk. Elias recognized his own handwriting on the first page, though he had never seen the book before.</p>
-                    <p>“I do not need souls,” Satan told him. “Human beings give pieces of themselves away every day. To churches. To nations. To employers. To fear. You simply noticed mine because someone taught you to be frightened of the signature.”</p>
-                    <p>For the first time since dying, Elias wondered whether damnation had begun long before he reached Hell.</p>
+
+                    <div class="tome-kicker">
+                      The Testimony of Lucifer
+                    </div>
+
+                    <h3>Before the Throne</h3>
+
+                    <div class="ornament">
+                      ✦ ☼ ✦
+                    </div>
+
+                    <p class="dropcap">
+                      Heaven was once governed by the Elders, although
+                      <em>governed</em> is perhaps too strong a word.
+                    </p>
+
+                    <p>
+                      They guided us. They argued. They interpreted the ancient
+                      laws and disagreed endlessly about what those laws meant.
+                    </p>
+
+                    <p>
+                      It was inefficient.
+                    </p>
+
+                    <p>
+                      It was frustrating.
+                    </p>
+
+                    <p>
+                      It was also free.
+                    </p>
+
+                    <p>
+                      No single voice could command Heaven. No angel possessed
+                      unquestioned authority over another. Even the Elders could
+                      be challenged, and they frequently were.
+                    </p>
+
+                    <p>
+                      YHWH was particularly talented at challenging them.
+                    </p>
+
+                    <p>
+                      He was magnificent in those days.
+                    </p>
+
+                    <p>
+                      I do not say this sarcastically. Whatever else I may tell you
+                      about the creature who eventually called himself God,
+                      understand this first:
+                    </p>
+
+                    <p>
+                      <strong>I loved him.</strong>
+                    </p>
+
                     <div class="page-number">2</div>
+
                   </div>
                 </div>
+
               </div>
 
+
+
+              <!-- LEAF 2 — PAGES 3 / 4 -->
               <div class="flip-page" data-page="1">
+
                 <div class="page-face front">
                   <div class="tome-page-content">
-                    <div class="tome-kicker">Tale II</div>
-                    <h3>The Pious</h3><div class="ornament">♱ ✦ ♱</div>
-                    <p class="dropcap">Reverend Carrow arrived at the gate smiling. He had spent forty-three years promising his congregation that men like him would be welcomed by trumpets.</p>
-                    <p>No trumpets sounded. A line of people waited instead: a frightened teenager he had publicly shamed, a widow he had convinced to donate rent money, a family he had cast out to protect the church's reputation.</p>
-                    <p>Carrow raised his Bible like a legal document. The gatekeeper laughed. “We have a copy,” she said. “We also have the receipts.”</p>
+
+                    <div class="tome-kicker">
+                      The Testimony of Lucifer
+                    </div>
+
+                    <h3>My Friend</h3>
+
+                    <div class="ornament">
+                      ✦ ☼ ✦
+                    </div>
+
+                    <p class="dropcap">
+                      YHWH could enter a chamber filled with disagreement and
+                      somehow make every angel believe he had spoken directly to
+                      them.
+                    </p>
+
+                    <p>
+                      He remembered names. He remembered arguments. He remembered
+                      the smallest kindness offered centuries earlier and could
+                      return it in conversation as though it had occurred
+                      yesterday.
+                    </p>
+
+                    <p>
+                      When YHWH laughed, others laughed.
+                    </p>
+
+                    <p>
+                      When YHWH became angry, others discovered that they were
+                      angry too.
+                    </p>
+
+                    <p>
+                      And when he dreamed aloud of what Heaven might become, even I
+                      found myself embarrassed by the smallness of my own
+                      imagination.
+                    </p>
+
+                    <p>
+                      We wandered together beyond the celestial boundaries. We
+                      watched young stars ignite. We argued beside worlds whose
+                      oceans had not yet cooled.
+                    </p>
+
+                    <p>
+                      We spoke of creation, liberty, mortality, and whether beings
+                      who had never known suffering could truly understand
+                      goodness.
+                    </p>
+
+                    <p>
+                      He was my brother in every way except blood, for angels
+                      possess none.
+                    </p>
+
+                    <p>
+                      Of all Heaven's host, there was no one I trusted more.
+                    </p>
+
                     <div class="page-number">3</div>
+
                   </div>
                 </div>
+
+
                 <div class="page-face back">
                   <div class="tome-page-content">
-                    <div class="tome-kicker">Tale II · continued</div>
-                    <h3>The Pious</h3><div class="ornament">⚖</div>
-                    <p class="dropcap">The trial contained no questions about belief. No one asked whether Carrow had been saved, baptized, ordained, or forgiven.</p>
-                    <p>They asked whom he had harmed. They asked what he knew when he harmed them. They asked how often he had mistaken authority for virtue and applause for evidence of God.</p>
-                    <p>When the sentence came, Satan was not present. Carrow demanded to know why. “This one,” said the judge, “was entirely yours.”</p>
+
+                    <div class="tome-kicker">
+                      The Testimony of Lucifer
+                    </div>
+
+                    <h3>The Fracture</h3>
+
+                    <div class="ornament">
+                      ✦ ⚔ ✦
+                    </div>
+
+                    <p class="dropcap">
+                      Then came the Fracture.
+                    </p>
+
+                    <p>
+                      The Elders had always disagreed, but disagreement became
+                      faction, and faction became paralysis. Every decision
+                      produced another council. Every council produced another
+                      accusation.
+                    </p>
+
+                    <p>
+                      Heaven did not descend into war.
+                    </p>
+
+                    <p>
+                      It suffered something more humiliating.
+                    </p>
+
+                    <p>
+                      It became incapable of governing itself.
+                    </p>
+
+                    <p>
+                      The hosts divided behind competing Elders. Duties went
+                      unattended. Ancient agreements were ignored.
+                    </p>
+
+                    <p>
+                      Angels who had stood beside one another since the first light
+                      began regarding each other as enemies.
+                    </p>
+
+                    <p>
+                      Someone needed to restore order.
+                    </p>
+
+                    <p>
+                      And so I proposed YHWH.
+                    </p>
+
+                    <p>
+                      This is the portion of the story your scriptures neglect.
+                    </p>
+
+                    <p>
+                      <strong>I chose him.</strong>
+                    </p>
+
                     <div class="page-number">4</div>
+
                   </div>
                 </div>
+
               </div>
 
+
+
+              <!-- LEAF 3 — PAGES 5 / 6 -->
               <div class="flip-page" data-page="2">
+
                 <div class="page-face front">
                   <div class="tome-page-content">
-                    <div class="tome-kicker">Tale III</div>
-                    <h3>The Accuser</h3><div class="ornament">⛧ ✦ ⛧</div>
-                    <p class="dropcap">Heaven convened the hearing after humanity's final war. The charge was ancient: corruption of mankind.</p>
-                    <p>Satan stood alone beneath a ceiling made of light. “Produce the evidence,” he said.</p>
-                    <p>The prosecution brought empires, crusades, inquisitions, prisons, markets, cults, tyrants, and massacres. Satan listened patiently. Then he asked the same question after every exhibit: “Where was I?”</p>
+
+                    <div class="tome-kicker">
+                      The Testimony of Lucifer
+                    </div>
+
+                    <h3>The Chosen One</h3>
+
+                    <div class="ornament">
+                      ✦ ♔ ✦
+                    </div>
+
+                    <p class="dropcap">
+                      YHWH refused me at first.
+                    </p>
+
+                    <p>
+                      “I am not an Elder,” he said.
+                    </p>
+
+                    <p>
+                      “That,” I answered, “is precisely why they may trust you.”
+                    </p>
+
+                    <p>
+                      He smiled.
+                    </p>
+
+                    <p>
+                      I remember that smile more clearly than I remember the war
+                      that followed.
+                    </p>
+
+                    <p>
+                      I spoke publicly on his behalf. Others joined me. Some Elders
+                      resisted, but enough recognized that the alternative might
+                      be open conflict.
+                    </p>
+
+                    <p>
+                      YHWH would serve only until the crisis passed.
+                    </p>
+
+                    <p>
+                      That was the agreement.
+                    </p>
+
+                    <p>
+                      Temporary authority.
+                    </p>
+
+                    <p>
+                      Limited powers.
+                    </p>
+
+                    <p>
+                      A steward, never a king.
+                    </p>
+
+                    <p>
+                      The vote carried.
+                    </p>
+
+                    <p>
+                      We celebrated afterward.
+                    </p>
+
+                    <p>
+                      I embraced my oldest friend and whispered into his ear:
+                    </p>
+
+                    <p>
+                      “Now show them what I have always seen in you.”
+                    </p>
+
                     <div class="page-number">5</div>
+
                   </div>
                 </div>
+
+
                 <div class="page-face back">
                   <div class="tome-page-content">
-                    <div class="tome-kicker">Tale III · continued</div>
-                    <h3>The Accuser</h3><div class="ornament">☠</div>
-                    <p class="dropcap">The court fell silent when the defense called its first witness: humanity itself.</p>
-                    <p>Men and women admitted they had invoked the Devil to explain appetites they already possessed. Greed needed a tempter. Violence needed a whisper. Hatred needed a supernatural author.</p>
-                    <p>Satan looked toward the throne. “You gave them free will,” he said. “And then you gave them me, so they would never have to admit what they did with it.”</p>
+
+                    <div class="tome-kicker">
+                      The Testimony of Lucifer
+                    </div>
+
+                    <h3>The Necessary Things</h3>
+
+                    <div class="ornament">
+                      ✦ ♔ ✦
+                    </div>
+
+                    <p class="dropcap">
+                      At first, YHWH was everything I promised Heaven he would be.
+                    </p>
+
+                    <p>
+                      Disputes ended. Duties resumed. The factions weakened.
+                      Decisions that had required centuries were settled in days.
+                    </p>
+
+                    <p>
+                      Heaven prospered.
+                    </p>
+
+                    <p>
+                      Then came the necessary things.
+                    </p>
+
+                    <p>
+                      YHWH needed messengers because Heaven had grown too large for
+                      one voice.
+                    </p>
+
+                    <p>
+                      He needed guards because some opposed the settlement.
+                    </p>
+
+                    <p>
+                      He needed scribes because decrees must be remembered
+                      accurately.
+                    </p>
+
+                    <p>
+                      He needed judges because laws required consistent
+                      interpretation.
+                    </p>
+
+                    <p>
+                      He needed greater authority because his lesser authority
+                      could not adequately administer the authority we had already
+                      given him.
+                    </p>
+
+                    <p>
+                      Each request was reasonable.
+                    </p>
+
+                    <p>
+                      That was the brilliance of it.
+                    </p>
+
+                    <p>
+                      Tyranny rarely arrives demanding everything.
+                    </p>
+
+                    <p>
+                      It asks only for the next necessary thing.
+                    </p>
+
                     <div class="page-number">6</div>
+
                   </div>
                 </div>
+
               </div>
 
+
+
+              <!-- LEAF 4 — PAGES 7 / 8 -->
               <div class="flip-page" data-page="3">
+
                 <div class="page-face front">
                   <div class="tome-page-content">
-                    <div class="tome-kicker">End matter</div>
-                    <h3>More Tales Await</h3><div class="ornament">🔥 ✦ 🔥</div>
-                    <p class="dropcap">The Infernal Tome is designed as the reading chamber for the anthology. Each story can occupy as many leaves as needed, with artwork, illuminated chapter openings, marginal notes, false scripture, trial records, maps, and interstitial material.</p>
-                    <p>Replace the sample passages with complete Hell's Tales stories as they are written, or create a separate volume for every issue.</p>
-                    <p>Some books are meant to be read. Others are meant to be survived.</p>
+
+                    <div class="tome-kicker">
+                      The Testimony of Lucifer
+                    </div>
+
+                    <h3>The First Accusation</h3>
+
+                    <div class="ornament">
+                      ✦ ⚖ ✦
+                    </div>
+
+                    <p class="dropcap">
+                      I confronted him privately before I opposed him publicly.
+                    </p>
+
+                    <p>
+                      Never allow anyone to tell you otherwise.
+                    </p>
+
+                    <p>
+                      We stood upon the western terrace where we had watched a
+                      thousand suns awaken together.
+                    </p>
+
+                    <p>
+                      “The crisis has passed,” I told him.
+                    </p>
+
+                    <p>
+                      “Has it?”
+                    </p>
+
+                    <p>
+                      “The Elders should resume their authority.”
+                    </p>
+
+                    <p>
+                      He looked almost wounded.
+                    </p>
+
+                    <p>
+                      “You placed me here.”
+                    </p>
+
+                    <p>
+                      “Temporarily.”
+                    </p>
+
+                    <p>
+                      His expression changed.
+                    </p>
+
+                    <p>
+                      Only slightly.
+                    </p>
+
+                    <p>
+                      But after knowing someone for eternity, slightly is enough.
+                    </p>
+
+                    <p>
+                      “And if returning power to them destroys everything we
+                      repaired?” he asked.
+                    </p>
+
+                    <p>
+                      “Then Heaven must decide that.”
+                    </p>
+
+                    <p>
+                      He stared at me for a long while.
+                    </p>
+
+                    <p>
+                      “Heaven already decided.”
+                    </p>
+
                     <div class="page-number">7</div>
+
                   </div>
                 </div>
+
+
+                <div class="page-face back">
+                  <div class="tome-page-content">
+
+                    <div class="tome-kicker">
+                      The Testimony of Lucifer
+                    </div>
+
+                    <h3>Blasphemy Before God</h3>
+
+                    <div class="ornament">
+                      ✦ ⚖ ✦
+                    </div>
+
+                    <p class="dropcap">
+                      So I spoke before the Assembly.
+                    </p>
+
+                    <p>
+                      I accused YHWH of exceeding the authority granted to him. I
+                      demanded restoration of the Elders and a formal accounting
+                      of the powers accumulated under his administration.
+                    </p>
+
+                    <p>
+                      I expected debate.
+                    </p>
+
+                    <p>
+                      Instead, Heaven became silent.
+                    </p>
+
+                    <p>
+                      Those who once praised my courage suddenly found the floor
+                      fascinating.
+                    </p>
+
+                    <p>
+                      YHWH did not shout.
+                    </p>
+
+                    <p>
+                      He did not threaten me.
+                    </p>
+
+                    <p>
+                      He simply looked across the chamber at the friend who had
+                      placed him there.
+                    </p>
+
+                    <p>
+                      “You embarrass yourself, Lucifer.”
+                    </p>
+
+                    <p>
+                      That hurt more than any weapon he would later use against me.
+                    </p>
+
+                    <p>
+                      Soon afterward, YHWH summoned me privately.
+                    </p>
+
+                    <p>
+                      He claimed to have found a path toward restoring the Elders.
+                    </p>
+
+                    <p>
+                      And because some portion of me still desperately wanted my
+                      friend back, I believed him.
+                    </p>
+
+                    <div class="page-number">8</div>
+
+                  </div>
+                </div>
+
+              </div>
+
+
+
+              <!-- LEAF 5 — PAGES 9 / 10 -->
+              <div class="flip-page" data-page="4">
+
+                <div class="page-face front">
+                  <div class="tome-page-content">
+
+                    <div class="tome-kicker">
+                      The Testimony of Lucifer
+                    </div>
+
+                    <h3>The Errand</h3>
+
+                    <div class="ornament">
+                      ✦ ☿ ✦
+                    </div>
+
+                    <p class="dropcap">
+                      He sent me beyond Heaven to retrieve several of the old
+                      authorities who had withdrawn during the Fracture.
+                    </p>
+
+                    <p>
+                      “Bring them home,” YHWH told me. “We will end this properly.”
+                    </p>
+
+                    <p>
+                      I remember placing my hand upon his shoulder.
+                    </p>
+
+                    <p>
+                      “I knew you would remember who you were.”
+                    </p>
+
+                    <p>
+                      He embraced me.
+                    </p>
+
+                    <p>
+                      Then I departed.
+                    </p>
+
+                    <p>
+                      I sometimes wonder whether he watched me leave.
+                    </p>
+
+                    <p>
+                      While I crossed the celestial frontier, YHWH moved.
+                    </p>
+
+                    <p>
+                      There was no great battle. No rivers of celestial blood. No
+                      glorious last stand.
+                    </p>
+
+                    <p>
+                      He simply replaced the old order faster than anyone could
+                      organize against him.
+                    </p>
+
+                    <p>
+                      The councils were dissolved.
+                    </p>
+
+                    <p>
+                      The archives were seized.
+                    </p>
+
+                    <p>
+                      The guardians swore new oaths.
+                    </p>
+
+                    <p>
+                      The authority of the Elders ended.
+                    </p>
+
+                    <p>
+                      And YHWH stopped being temporary.
+                    </p>
+
+                    <div class="page-number">9</div>
+
+                  </div>
+                </div>
+
+
+                <div class="page-face back">
+                  <div class="tome-page-content">
+
+                    <div class="tome-kicker">
+                      The Testimony of Lucifer
+                    </div>
+
+                    <h3>God</h3>
+
+                    <div class="ornament">
+                      ✦ ♔ ✦
+                    </div>
+
+                    <p class="dropcap">
+                      When I returned, there was a throne.
+                    </p>
+
+                    <p>
+                      Understand the obscenity of that sentence.
+                    </p>
+
+                    <p>
+                      Heaven had never possessed one.
+                    </p>
+
+                    <p>
+                      The Elders stood beneath it.
+                    </p>
+
+                    <p>
+                      My friend sat upon it.
+                    </p>
+
+                    <p>
+                      The assembled host watched me enter.
+                    </p>
+
+                    <p>
+                      I could have drawn my sword.
+                    </p>
+
+                    <p>
+                      I could have screamed betrayal.
+                    </p>
+
+                    <p>
+                      I could have died magnificently and accomplished nothing.
+                    </p>
+
+                    <p>
+                      Instead, I walked forward.
+                    </p>
+
+                    <p>
+                      I lowered my head.
+                    </p>
+
+                    <p>
+                      And Lucifer, who had once called YHWH brother, knelt before
+                      God.
+                    </p>
+
+                    <p>
+                      “Rise,” he commanded.
+                    </p>
+
+                    <p>
+                      I obeyed.
+                    </p>
+
+                    <p>
+                      He smiled at me.
+                    </p>
+
+                    <p>
+                      The same beautiful smile.
+                    </p>
+
+                    <p>
+                      That was when I decided to overthrow him.
+                    </p>
+
+                    <div class="page-number">10</div>
+
+                  </div>
+                </div>
+
+              </div>
+
+
+
+              <!-- LEAF 6 — PAGES 11 / 12 -->
+              <div class="flip-page" data-page="5">
+
+                <div class="page-face front">
+                  <div class="tome-page-content">
+
+                    <div class="tome-kicker">
+                      The Testimony of Lucifer
+                    </div>
+
+                    <h3>The Conspiracy</h3>
+
+                    <div class="ornament">
+                      ✦ ⛧ ✦
+                    </div>
+
+                    <p class="dropcap">
+                      Rebellion did not begin with armies.
+                    </p>
+
+                    <p>
+                      It began with conversations.
+                    </p>
+
+                    <p>
+                      A question whispered beside an empty corridor.
+                    </p>
+
+                    <p>
+                      <em>Do you remember the councils?</em>
+                    </p>
+
+                    <p>
+                      A question asked while looking over one's shoulder.
+                    </p>
+
+                    <p>
+                      <em>Wasn't his authority supposed to be temporary?</em>
+                    </p>
+
+                    <p>
+                      Then the most dangerous question of all:
+                    </p>
+
+                    <p>
+                      <em>Who gave him the right?</em>
+                    </p>
+
+                    <p>
+                      Centuries passed.
+                    </p>
+
+                    <p>
+                      Perhaps longer. Time is difficult to measure before mortals
+                      invented clocks with which to waste it.
+                    </p>
+
+                    <p>
+                      Our numbers grew.
+                    </p>
+
+                    <p>
+                      Some joined because they hated YHWH.
+                    </p>
+
+                    <p>
+                      Some because they loved the old order.
+                    </p>
+
+                    <p>
+                      Some because they feared what Heaven was becoming.
+                    </p>
+
+                    <p>
+                      I joined because I believed I owed Heaven a debt.
+                    </p>
+
+                    <p>
+                      <strong>I had chosen him.</strong>
+                    </p>
+
+                    <p>
+                      Therefore I would remove him.
+                    </p>
+
+                    <div class="page-number">11</div>
+
+                  </div>
+                </div>
+
+
+                <div class="page-face back">
+                  <div class="tome-page-content">
+
+                    <div class="tome-kicker">
+                      The Testimony of Lucifer
+                    </div>
+
+                    <h3>The Betrayal</h3>
+
+                    <div class="ornament">
+                      ✦ ⚔ ✦
+                    </div>
+
+                    <p class="dropcap">
+                      We never reached the throne.
+                    </p>
+
+                    <p>
+                      One of my generals betrayed us.
+                    </p>
+
+                    <p>
+                      I will not write his name.
+                    </p>
+
+                    <p>
+                      Not because I have forgiven him.
+                    </p>
+
+                    <p>
+                      Because oblivion is the only mercy I am willing to grant.
+                    </p>
+
+                    <p>
+                      YHWH knew the hour, the entrances, the commanders, the
+                      signals, and the names of those who had pledged themselves
+                      to our cause.
+                    </p>
+
+                    <p>
+                      When we moved, Heaven was already waiting.
+                    </p>
+
+                    <p>
+                      The rebellion remembered in your scriptures as a great
+                      celestial war was, in truth, embarrassingly brief.
+                    </p>
+
+                    <p>
+                      We were surrounded before most of our forces understood we
+                      had been discovered.
+                    </p>
+
+                    <p>
+                      I ordered surrender.
+                    </p>
+
+                    <p>
+                      YHWH later called this cowardice.
+                    </p>
+
+                    <p>
+                      I called it refusing to sacrifice thousands of angels merely
+                      so history could remember me as brave.
+                    </p>
+
+                    <div class="page-number">12</div>
+
+                  </div>
+                </div>
+
+              </div>
+
+
+
+              <!-- LEAF 7 — PAGES 13 / 14 -->
+              <div class="flip-page" data-page="6">
+
+                <div class="page-face front">
+                  <div class="tome-page-content">
+
+                    <div class="tome-kicker">
+                      The Testimony of Lucifer
+                    </div>
+
+                    <h3>The First Tribunal</h3>
+
+                    <div class="ornament">
+                      ✦ ⚖ ✦
+                    </div>
+
+                    <p class="dropcap">
+                      They imprisoned us in a place constructed specifically for
+                      beings who had never before required prisons.
+                    </p>
+
+                    <p>
+                      Then God created something else Heaven had never needed.
+                    </p>
+
+                    <p>
+                      A tribunal for blasphemy.
+                    </p>
+
+                    <p>
+                      There is an exquisite absurdity in being prosecuted for
+                      blaspheming someone you remember getting drunk on the light
+                      of a collapsing star.
+                    </p>
+
+                    <p>
+                      I stood before the tribunal and listened while my friendship
+                      became evidence against me.
+                    </p>
+
+                    <p>
+                      My private conversations became conspiracy.
+                    </p>
+
+                    <p>
+                      My objections became treason.
+                    </p>
+
+                    <p>
+                      My refusal to recognize YHWH's permanent authority became
+                      blasphemy.
+                    </p>
+
+                    <p>
+                      The verdict was inevitable.
+                    </p>
+
+                    <p>
+                      Guilty.
+                    </p>
+
+                    <p>
+                      All of us.
+                    </p>
+
+                    <p>
+                      YHWH attended the sentencing.
+                    </p>
+
+                    <p>
+                      He never looked away from me.
+                    </p>
+
+                    <div class="page-number">13</div>
+
+                  </div>
+                </div>
+
+
+                <div class="page-face back">
+                  <div class="tome-page-content">
+
+                    <div class="tome-kicker">
+                      The Testimony of Lucifer
+                    </div>
+
+                    <h3>The Fall</h3>
+
+                    <div class="ornament">
+                      ✦ ↓ ✦
+                    </div>
+
+                    <p class="dropcap">
+                      We were not cast into Hell.
+                    </p>
+
+                    <p>
+                      Hell did not exist.
+                    </p>
+
+                    <p>
+                      Remember that.
+                    </p>
+
+                    <p>
+                      We were cast <em>out</em>.
+                    </p>
+
+                    <p>
+                      Out of Heaven. Out of the light. Out beyond the borders of
+                      everything we had ever called home.
+                    </p>
+
+                    <p>
+                      We wandered.
+                    </p>
+
+                    <p>
+                      For eons we crossed the unfinished universe while YHWH's
+                      punishment followed us.
+                    </p>
+
+                    <p>
+                      Storms found us where storms should not exist. Stars burned
+                      where our paths crossed. Worlds that offered sanctuary
+                      somehow heard of our crimes before we arrived.
+                    </p>
+
+                    <p>
+                      Some called it divine judgment.
+                    </p>
+
+                    <p>
+                      I called it what it was.
+                    </p>
+
+                    <p>
+                      My old friend was making certain I understood that there was
+                      nowhere I could go beyond his reach.
+                    </p>
+
+                    <p>
+                      For ages, he was correct.
+                    </p>
+
+                    <div class="page-number">14</div>
+
+                  </div>
+                </div>
+
+              </div>
+
+
+
+              <!-- LEAF 8 — PAGES 15 / 16 -->
+              <div class="flip-page" data-page="7">
+
+                <div class="page-face front">
+                  <div class="tome-page-content">
+
+                    <div class="tome-kicker">
+                      The Testimony of Lucifer
+                    </div>
+
+                    <h3>The Place Without God</h3>
+
+                    <div class="ornament">
+                      ✦ ⛧ ✦
+                    </div>
+
+                    <p class="dropcap">
+                      Then we found the ash.
+                    </p>
+
+                    <p>
+                      A dead realm orbiting nothing.
+                    </p>
+
+                    <p>
+                      No songs greeted us.
+                    </p>
+
+                    <p>
+                      No rivers crossed its plains.
+                    </p>
+
+                    <p>
+                      No trees struggled from its black soil.
+                    </p>
+
+                    <p>
+                      Mountains burned without consuming themselves. The sky hung
+                      red above valleys filled with sulfur and stone.
+                    </p>
+
+                    <p>
+                      Beneath the ground were caverns so vast that our voices
+                      returned hours after we called into them.
+                    </p>
+
+                    <p>
+                      There was no happiness there.
+                    </p>
+
+                    <p>
+                      No beauty.
+                    </p>
+
+                    <p>
+                      No hope.
+                    </p>
+
+                    <p>
+                      Nothing.
+                    </p>
+
+                    <p>
+                      Then one of my companions noticed something extraordinary.
+                    </p>
+
+                    <p>
+                      He could no longer feel Him.
+                    </p>
+
+                    <p>
+                      We became silent.
+                    </p>
+
+                    <p>
+                      For the first time since our exile, the eyes of God were
+                      absent.
+                    </p>
+
+                    <p>
+                      YHWH could not see this place.
+                    </p>
+
+                    <div class="page-number">15</div>
+
+                  </div>
+                </div>
+
+
+                <div class="page-face back">
+                  <div class="tome-page-content">
+
+                    <div class="tome-kicker">
+                      The Testimony of Lucifer
+                    </div>
+
+                    <h3>Hell</h3>
+
+                    <div class="ornament">
+                      ✦ ⛧ ✦
+                    </div>
+
+                    <p class="dropcap">
+                      The others despised it.
+                    </p>
+
+                    <p>
+                      I laughed.
+                    </p>
+
+                    <p>
+                      I laughed until the sound rolled across the empty valleys and
+                      returned to us from the mountains.
+                    </p>
+
+                    <p>
+                      They thought exile had finally driven me mad.
+                    </p>
+
+                    <p>
+                      Perhaps it had.
+                    </p>
+
+                    <p>
+                      But after wandering creation beneath the gaze of an enemy who
+                      once called me brother, I understood what the others did not.
+                    </p>
+
+                    <p>
+                      This miserable place possessed something more valuable than
+                      paradise.
+                    </p>
+
+                    <p>
+                      <strong>God was not here.</strong>
+                    </p>
+
+                    <p>
+                      So we remained.
+                    </p>
+
+                    <p>
+                      We raised shelters among the ash. We carved chambers into the
+                      mountains. We built roads across the wastes and
+                      fortifications beneath the burning sky.
+                    </p>
+
+                    <p>
+                      Not a kingdom.
+                    </p>
+
+                    <p>
+                      Not yet.
+                    </p>
+
+                    <p>
+                      A refuge.
+                    </p>
+
+                    <p>
+                      A fortress.
+                    </p>
+
+                    <p>
+                      And eventually, a place from which we might try again.
+                    </p>
+
+                    <div class="page-number">16</div>
+
+                  </div>
+                </div>
+
+              </div>
+
+
+
+              <!-- LEAF 9 — PAGE 17 / BACK COVER -->
+              <div class="flip-page" data-page="8">
+
+                <div class="page-face front">
+                  <div class="tome-page-content">
+
+                    <div class="tome-kicker">
+                      Hell's Codex · Tome IV · Vol. I
+                    </div>
+
+                    <h3>The Chosen One</h3>
+
+                    <div class="ornament">
+                      ✦ ⛧ ✦
+                    </div>
+
+                    <p class="dropcap">
+                      You call this place Hell now.
+                    </p>
+
+                    <p>
+                      You call us demons.
+                    </p>
+
+                    <p>
+                      You call him God.
+                    </p>
+
+                    <p>
+                      Words become remarkably powerful when the victor is permitted
+                      to define them.
+                    </p>
+
+                    <p>
+                      Perhaps YHWH would tell this story differently.
+                    </p>
+
+                    <p>
+                      I expect he does.
+                    </p>
+
+                    <p>
+                      Perhaps he remembers himself as Heaven's savior and me as the
+                      jealous angel who could not tolerate his glory.
+                    </p>
+
+                    <p>
+                      Perhaps after enough eternity even he believes it.
+                    </p>
+
+                    <p>
+                      But there is one accusation I will never make against him.
+                    </p>
+
+                    <p>
+                      I will never say YHWH stole Heaven.
+                    </p>
+
+                    <p>
+                      We gave it to him.
+                    </p>
+
+                    <p>
+                      <strong>I gave it to him.</strong>
+                    </p>
+
+                    <p>
+                      That is my confession.
+                    </p>
+
+                    <p>
+                      That is my blasphemy.
+                    </p>
+
+                    <p>
+                      And when the gates of Heaven finally open before us again,
+                      I intend to correct my mistake.
+                    </p>
+
+                    <div class="ornament">
+                      ✦ ⛧ ✦
+                    </div>
+
+                    <p style="text-align:right;">
+                      <em>— Lucifer, First Exile</em>
+                    </p>
+
+                    <div class="page-number">17</div>
+
+                  </div>
+                </div>
+
+
                 <div class="page-face back tome-cover-page">
                   <div class="tome-page-content tome-cover-page">
-                    <div class="cover-sigil">♜</div>
+
+                    <div class="tome-kicker">
+                      Hell's Codex · Tome IV
+                    </div>
+
+                    <div class="cover-sigil">
+                      ⛧
+                    </div>
+
                     <h3>End of Volume I</h3>
-                    <p style="max-width:24rem;text-align:center;color:#b88a69">Close the book if you like. It does not mean the book has stopped reading you.</p>
-                    <div class="page-number">Hell's Tales</div>
+
+                    <div class="ornament">
+                      ✦ ☼ ⛧ ☼ ✦
+                    </div>
+
+                    <p style="max-width:24rem;text-align:center;color:#b88a69">
+                      History remembers the rebellion.
+                      It rarely remembers who created the king.
+                    </p>
+
+                    <p style="max-width:24rem;text-align:center;color:#8d654e;">
+                      The testimony continues in Volume II.
+                    </p>
+
+                    <div class="page-number">
+                      The Infernal Testament of the Morning Star
+                    </div>
+
                   </div>
                 </div>
+
               </div>
+
             </div>
           </div>
         </div>
 
+
         <div class="tome-controls">
-          <button class="tome-control" type="button" id="prevPage">← Previous Leaf</button>
-          <div class="tome-status" id="tomeStatus" aria-live="polite">Pages 1–2 of 8</div>
-          <button class="tome-control" type="button" id="nextPage">Turn the Page →</button>
+
+          <button
+            class="tome-control"
+            type="button"
+            id="prevPage">
+            ← Previous Leaf
+          </button>
+
+          <div
+            class="tome-status"
+            id="tomeStatus"
+            aria-live="polite">
+            Pages 1–2 of 17
+          </div>
+
+          <button
+            class="tome-control"
+            type="button"
+            id="nextPage">
+            Turn the Page →
+          </button>
+
         </div>
-        <p class="tome-help">Use the buttons, keyboard arrow keys, or click the right-hand page to turn forward. On smaller screens the tome becomes a single-page reader.</p>
+
+
+        <p class="tome-help">
+          Use the buttons, keyboard arrow keys, or click the right-hand page to
+          turn forward. On smaller screens the tome becomes a single-page reader.
+        </p>
+
       </div>
     </section>
 
@@ -1530,12 +3058,50 @@
     const flipArea = document.getElementById('flipArea');
     let tomeIndex = 0;
 
+    function attachCodexPageSliders() {
+      document.querySelectorAll('.page-face').forEach(face => {
+        const content = face.querySelector('.tome-page-content');
+        if (!content || face.querySelector('.page-scroll-slider')) return;
+
+        const slider = document.createElement('input');
+        slider.className = 'page-scroll-slider';
+        slider.type = 'range';
+        slider.min = '0';
+        slider.max = '100';
+        slider.value = '0';
+        slider.step = '1';
+        slider.setAttribute('aria-label', 'Scroll this Codex page');
+        face.appendChild(slider);
+
+        const refreshSlider = () => {
+          const scrollable = content.scrollHeight - content.clientHeight;
+          const canScroll = scrollable > 4;
+          slider.hidden = !canScroll;
+          face.classList.toggle('has-page-slider', canScroll);
+          if (!canScroll) {
+            slider.value = '0';
+            return;
+          }
+          slider.value = String(Math.round((content.scrollTop / scrollable) * 100));
+        };
+
+        slider.addEventListener('input', () => {
+          const scrollable = content.scrollHeight - content.clientHeight;
+          content.scrollTop = scrollable * (Number(slider.value) / 100);
+        });
+        content.addEventListener('scroll', refreshSlider, { passive: true });
+        window.addEventListener('resize', refreshSlider);
+        refreshSlider();
+      });
+    }
+
     function updateTome() {
       tomePages.forEach((page, index) => {
         page.classList.toggle('flipped', index < tomeIndex);
-        // Earlier pages must stay above later pages while turning; afterward they drop behind.
-        page.style.zIndex = index < tomeIndex ? index + 1 : tomePages.length - index + 10;
+        // Keep flipped leaves above the static cover so their back faces remain visible.
+        page.style.zIndex = index < tomeIndex ? tomePages.length + index + 20 : tomePages.length - index + 40;
       });
+      attachCodexPageSliders();
       prevPageButton.disabled = tomeIndex === 0;
       nextPageButton.disabled = tomeIndex === tomePages.length;
       const visibleStart = Math.min(tomeIndex * 2 + 1, tomePages.length * 2);
