@@ -531,6 +531,17 @@
     .story-card .sigil { font-size: 2.4rem; color: #e84a26; filter: drop-shadow(0 0 9px #ff3010); }
     .story-card h3 { margin: 1rem 0 .6rem; color: #f1c6a4; font-size: 1.55rem; }
     .story-card p { color: #9f8675; line-height: 1.68; }
+    .story-date {
+      margin: .85rem 0 0;
+      padding: .55rem .65rem;
+      border: 1px solid rgba(255, 83, 28, .3);
+      color: #f0a16f;
+      background: rgba(52, 8, 3, .42);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      font: 800 .6rem Arial, sans-serif;
+      line-height: 1.55;
+    }
     .story-meta { margin-top: 1.25rem; color: #d84422; text-transform: uppercase; letter-spacing: .14em; font: 700 .68rem Arial, sans-serif; }
 
     .infernal-code {
@@ -1239,36 +1250,42 @@
           <div class="sigil">⛧</div>
           <h3>The Bargain</h3>
           <p>A desperate soul comes to Hell expecting a monster and instead finds a negotiator who remembers every promise the living world made and quietly broke.</p>
+          <div class="story-date">Feb. 22 · near midnight · The Feast of Broken Vows</div>
           <div class="story-meta">Temptation · Free Will · Consequence</div>
         </a>
         <a class="story-card" data-number="II" href="stories/the-pious.html">
           <div class="sigil">♱</div>
           <h3>The Pious</h3>
           <p>A revered religious leader builds a public life around salvation while privately weaponizing fear, shame, and obedience. Death finally introduces him to the people he condemned.</p>
+          <div class="story-date">Oct. 13 · ninth bell · The Feast of the Scapegoat</div>
           <div class="story-meta">Hypocrisy · Power · Judgment</div>
         </a>
         <a class="story-card" data-number="III" href="stories/the-accuser.html">
           <div class="sigil">☿</div>
           <h3>The Accuser</h3>
           <p>Satan is called to answer for humanity's corruption, but the evidence begins to suggest that mankind required very little help—and that Heaven may have reasons for maintaining the old story.</p>
+          <div class="story-date">Aug. 19 · Court Above · The Day of the Accused</div>
           <div class="story-meta">Satan · Blame · Rebellion</div>
         </a>
         <a class="story-card" data-number="IV" href="stories/the-tribunal.html">
           <div class="sigil">⚖</div>
           <h3>The Tribunal</h3>
           <p>A dead congregation arrives expecting reward. Instead, every prayer, donation, exclusion, confession, and act of cruelty is entered into a court where labels of believer and sinner carry no weight.</p>
+          <div class="story-date">Nov. 13 · first docket · The Tribunal of Saints</div>
           <div class="story-meta">Faith · Justice · Accountability</div>
         </a>
         <a class="story-card" data-number="V" href="stories/the-furnace-gospel.html">
           <div class="sigil">🔥</div>
           <h3>The Furnace Gospel</h3>
           <p>A forbidden scripture surfaces claiming Hell was never built as a torture chamber but transformed into one by centuries of human fear, doctrine, and political necessity.</p>
+          <div class="story-date">Sept. 9 · ash-hour · The Festival of Forbidden Knowledge</div>
           <div class="story-meta">Doctrine · Fear · Revision</div>
         </a>
         <a class="story-card" data-number="VI" href="stories/the-last-sermon.html">
           <div class="sigil">☠</div>
           <h3>The Last Sermon</h3>
           <p>On the final night of his life, a preacher is visited by the Devil he spent forty years describing from the pulpit. The visitor has corrections.</p>
+          <div class="story-date">Dec. 24-25 · 3:17 a.m. onward · Unholy Night becomes Christmas in Hell</div>
           <div class="story-meta">Reputation · Truth · Reckoning</div>
         </a>
       </div>
@@ -1339,9 +1356,8 @@
               <div class="tome-page-content tome-cover-page">
 
                 <div class="tome-kicker"></div>
-
+                <br>
                 <h3>Hell's Codex</h3>
-
                 <div class="tome-kicker">
                   Knowledge from Below
                 </div>
@@ -1358,6 +1374,7 @@
                   Hell's Codex, Tome IV:<br>
                   The Infernal Testament of the Morning Star
                 </div>
+                <br><br>
 
               </div>
             </div>
@@ -3352,8 +3369,14 @@
     if (hellAmbientAudio) {
       hellAmbientAudio.loop = true;
       hellAmbientAudio.volume = 0.28;
+      try {
+        if (sessionStorage.getItem('hellsTalesAudioArmed') === 'true') {
+          sessionStorage.removeItem('hellsTalesAudioArmed');
+        }
+      } catch (error) {}
 
       const startHellAudio = () => {
+        hellAmbientAudio.muted = false;
         const attempt = hellAmbientAudio.play();
         if (attempt && typeof attempt.catch === 'function') attempt.catch(() => {});
       };
