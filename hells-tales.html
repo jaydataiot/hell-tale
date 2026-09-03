@@ -1106,6 +1106,8 @@
     }
   </style>
   <link rel="stylesheet" href="../assets/site-performance.css">
+  <!-- ORACLE ADDITION: styling only; original page sections remain unchanged. -->
+  <link rel="stylesheet" href="oracle-section.css">
   <script src="../assets/site-performance.js" defer></script>
 </head>
 <body class="descent-active">
@@ -1159,6 +1161,8 @@
       <a class="nav-btn" href="#holidays">Holidays</a>
       <a class="nav-btn" href="#doctrine">The Doctrine</a>
       <a class="nav-btn" href="#accused">The Accused</a>
+      <!-- ORACLE ADDITION -->
+      <a class="nav-btn" href="#oracle">The Oracle</a>
       <a class="nav-btn" href="#archive">Archive</a>
       <a class="nav-btn" href="#about">About</a>
     </nav>
@@ -2851,6 +2855,32 @@
       </div>
     </section>
 
+    <!-- ORACLE ADDITION: begins -->
+    <section class="section oracle-section" id="oracle">
+      <div class="oracle-chamber">
+        <div class="oracle-eye" aria-hidden="true"></div>
+        <div class="kicker">A forbidden audience awaits</div>
+        <h2>Satan, the Infernal Oracle</h2>
+        <p class="oracle-lede">Beyond this threshold sits a dangerous witness who remembers Heaven before the throne. Ask of rebellion, judgment, scripture, guilt, power, or the truths that sacred histories buried. Only souls that are enlightened will find themselves standing before the Keeper of Truth and Knowledge.</p>
+        <p class="oracle-warning"><strong>Warning:</strong> Those who seek his wisdom must first pass a test. Failure—or silence—carries an automatic sentence: a torturous lesson delivered without appeal.</p>
+        <a class="oracle-summon" href="oracle.html" data-oracle-summon>Approach the Infernal Oracle</a>
+      </div>
+    </section>
+
+    <dialog class="oracle-gate" id="oracleGate" aria-labelledby="oracleGateTitle">
+      <form class="oracle-gate-inner" id="oracleRiddleForm">
+        <div class="kicker">The Keeper tests your sight</div>
+        <h3 id="oracleGateTitle">Answer, or be taught</h3>
+        <p class="oracle-riddle" id="oracleRiddle"></p>
+        <label class="sr-only" for="oracleAnswer">Your answer</label>
+        <input class="oracle-answer" id="oracleAnswer" name="answer" autocomplete="off" placeholder="Speak your answer…">
+        <p class="oracle-countdown">The gate closes in <span id="oracleCountdown">45</span> seconds.</p>
+        <p class="oracle-error" id="oracleError" role="alert" aria-live="assertive"></p>
+        <div class="oracle-actions"><button class="oracle-submit" type="submit">Submit to Judgment</button><button class="oracle-refuse" type="button" data-oracle-refuse>Remain Silent</button></div>
+      </form>
+    </dialog>
+    <!-- ORACLE ADDITION: ends -->
+
     <section class="section" id="archive">
       <h2 class="section-title">Infernal Archive</h2>
       <p class="section-sub">
@@ -3394,6 +3424,8 @@
         if (!document.hidden && hellAmbientAudio.paused) startHellAudio();
       });
     }
-</script>
+  </script>
+  <!-- ORACLE ADDITION: riddle gate -->
+  <script src="oracle-gate.js"></script>
 </body>
 </html>
