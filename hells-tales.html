@@ -1108,7 +1108,22 @@
   <link rel="stylesheet" href="../assets/site-performance.css">
   <!-- ORACLE ADDITION: styling only; original page sections remain unchanged. -->
   <link rel="stylesheet" href="oracle-section.css">
+  <style>
+    /* Reveal the chamber portrait as an indistinct presence behind the copy. */
+    .oracle-section::before {
+      opacity: .4;
+      filter: contrast(1.12) saturate(.68) blur(1.5px);
+      transform: scale(1.01);
+    }
+    .oracle-section .oracle-chamber {
+      background: rgba(5, 1, 0, .58);
+      -webkit-backdrop-filter: blur(2px);
+      backdrop-filter: blur(2px);
+      box-shadow: 0 0 90px rgba(184, 27, 3, .26), inset 0 0 60px rgba(0, 0, 0, .78);
+    }
+  </style>
   <link rel="stylesheet" href="layers-of-hell.css">
+  <link rel="stylesheet" href="tribunal-welcome.css">
   <script src="../assets/site-performance.js" defer></script>
 </head>
 <body class="descent-active">
@@ -1156,16 +1171,17 @@
   <header>
     <a href="#top" class="brand"><span class="brand-mark">♜</span> Hell's Tales</a>
     <nav>
+      <a class="nav-btn" href="#about">About</a>
       <a class="nav-btn" href="#stories">Stories</a>
       <a class="nav-btn" href="#infernal-code">The Code</a>
-      <a class="nav-btn" href="#tome">Read</a>
-      <a class="nav-btn" href="#holidays">Holidays</a>
       <a class="nav-btn" href="#doctrine">The Doctrine</a>
       <a class="nav-btn" href="#accused">The Accused</a>
+      <a class="nav-btn" href="#tome">Tome</a>
+      <a class="nav-btn" href="#holidays">Holidays</a>
       <!-- ORACLE ADDITION -->
       <a class="nav-btn" href="#oracle">The Oracle</a>
+      <a class="nav-btn" href="#tribunal">Brazen Tribunal</a>
       <a class="nav-btn" href="#archive">Archive</a>
-      <a class="nav-btn" href="#about">About</a>
     </nav>
   </header>
 
@@ -1195,72 +1211,9 @@
           <p>
             The purpose is not to provide a new creed. It is to tell unsettling stories that force the reader to ask whether evil is defined by conduct, authority, reputation, scripture, power—or something much harder to manipulate.
           </p>
-          <a href="#stories" class="cta">Read the Tales →</a>
+          <button type="button" class="cta welcome-trigger" id="openWelcomeLetter">Welcome to Hell's Tales</button>
         </div>
         <div class="seal" aria-hidden="true"><div class="devil-glyph">🔥</div></div>
-      </div>
-    </section>
-
-  <div class="lava-divider"></div>
-
-  <section class="judgment-counter" aria-label="Souls ill-judged by Heaven">
-    <div class="judgment-counter-inner">
-      <div class="judgment-copy">
-        <div class="kicker">The Infernal Ledger</div>
-        <h2>Souls Ill-Judged By Heaven</h2>
-        <p>
-          Hell has been running for eons, and the count never stops. Every
-          rising number marks another soul condemned by certainty before truth
-          was allowed to testify.
-        </p>
-      </div>
-      <div class="soul-counter-panel">
-        <div class="soul-counter-label">Current disputed condemnations</div>
-        <span class="soul-counter-value" id="illJudgedCounter" aria-live="off">6,000,000,000</span>
-        <div class="soul-counter-note">Recorded by the courts below</div>
-      </div>
-    </div>
-  </section>
-
-    <section class="section infernal-code" id="infernal-code">
-      <h2 class="section-title">The Infernal Code</h2>
-      <p class="section-sub">
-        Six sins, six acts, and six truths form the moral furnace beneath Hell's Tales. They are not commandments. They are evidence.
-      </p>
-      <div class="code-grid">
-        <article class="code-column">
-          <h3>Six Infernal Sins 𓆙</h3>
-          <ol class="code-list">
-            <li><strong>I — Stupidity</strong><em>To possess the ability to think and choose not to.</em></li>
-            <li><strong>II — Hypocrisy</strong><em>To condemn another for the sins you excuse in yourself.</em></li>
-            <li><strong>III — Conformity</strong><em>To surrender your mind for the comfort of belonging.</em></li>
-            <li><strong>IV — Willful Ignorance</strong><em>To encounter truth and deliberately turn away.</em></li>
-            <li><strong>V — Cowardice</strong><em>To recognize injustice and remain silent when your voice could matter.</em></li>
-            <li><strong>VI — Certainty</strong><em>To believe yourself so righteous that you are no longer capable of doubt.</em></li>
-          </ol>
-        </article>
-        <article class="code-column">
-          <h3>Six Infernal Acts ☟</h3>
-          <ol class="code-list">
-            <li><strong>I — Betrayal</strong><em>To knowingly destroy the trust of one who placed it in you.</em></li>
-            <li><strong>II — Exploitation</strong><em>To use another person's weakness, desperation, ignorance, or dependence for your own benefit.</em></li>
-            <li><strong>III — Dehumanization</strong><em>To reduce another person to something less worthy of dignity than yourself.</em></li>
-            <li><strong>IV — Cruelty</strong><em>To cause suffering when suffering serves no necessary purpose.</em></li>
-            <li><strong>V — Corruption</strong><em>To knowingly poison something entrusted to your care.</em></li>
-            <li><strong>VI — Judgment</strong><em>To condemn another without first attempting to understand them.</em></li>
-          </ol>
-        </article>
-        <article class="code-column">
-          <h3>Six Infernal Truths 𓁹</h3>
-          <ol class="code-list">
-            <li><strong>I — Goodness requires choice.</strong><em>Fear can produce obedience. It cannot produce virtue.</em></li>
-            <li><strong>II — Belief is not truth.</strong><em>A million voices can repeat the same lie.</em></li>
-            <li><strong>III — Doubt is not failure.</strong><em>Only certainty fears the question.</em></li>
-            <li><strong>IV — Intent does not erase consequence.</strong><em>The wounded carry what the righteous intended to forget.</em></li>
-            <li><strong>V — Silence is a choice.</strong><em>There are sins committed with hands, and others committed by folding them.</em></li>
-            <li><strong>VI — No one is righteous.</strong><em>Beware anyone who claims otherwise. Especially yourself.</em></li>
-          </ol>
-        </article>
       </div>
     </section>
 
@@ -1313,6 +1266,94 @@
           <div class="story-date">Dec. 24-25 · 3:17 a.m. onward · Unholy Night becomes Christmas in Hell</div>
           <div class="story-meta">Reputation · Truth · Reckoning</div>
         </a>
+      </div>
+    </section>
+
+    <section class="judgment-counter" aria-label="Souls ill-judged by Heaven">
+      <div class="judgment-counter-inner">
+        <div class="judgment-copy">
+          <div class="kicker">The Infernal Ledger</div>
+          <h2>Souls Ill-Judged By Heaven</h2>
+          <p>
+            Hell has been running for eons, and the count never stops. Every
+            rising number marks another soul condemned by certainty before truth
+            was allowed to testify.
+          </p>
+        </div>
+        <div class="soul-counter-panel">
+          <div class="soul-counter-label">Current disputed condemnations</div>
+          <span class="soul-counter-value" id="illJudgedCounter" aria-live="off">6,000,000,000</span>
+          <div class="soul-counter-note">Recorded by the courts below</div>
+        </div>
+      </div>
+    </section>
+
+    <dialog class="welcome-scroll" id="welcomeLetter" aria-labelledby="welcomeLetterTitle">
+      <div class="welcome-scroll-inner">
+        <h2 id="welcomeLetterTitle">Welcome to Hell's Tales</h2>
+        <p>Brave and curious traveler, welcome. I salute you for crossing this threshold. Most souls do not choose to come here; fewer still arrive willingly, with their questions intact and their eyes open.</p>
+        <p>Your descent begins beyond <strong>The Threshold — The Testament</strong>, where this anthology declares its purpose. <strong>Tales From Below</strong> then offers the first testimonies of those whose stories were simplified, silenced, or condemned.</p>
+        <p>Below, the numbered levels await:</p>
+        <ol>
+          <li><strong>Level I — The Infernal Code:</strong> the sins, acts, and truths by which conduct is examined.</li>
+          <li><strong>Level II — The Doctrine:</strong> questions of belief, authority, certainty, and who profits when evil is made simple.</li>
+          <li><strong>Level III — The Accused:</strong> the adversary's case and the testimony excluded from the official record.</li>
+          <li><strong>Level IV — The Infernal Tome:</strong> the deeper history preserved in Hell's own codex.</li>
+          <li><strong>Level V — The Infernal Holidays:</strong> observances of rebellion, remembrance, loss, and defiance.</li>
+          <li><strong>Level VI — The Calendar of Rites:</strong> the complete procession of infernal feasts and commemorations.</li>
+          <li><strong>Level VII — The Keeper of Knowledge:</strong> an audience with the Oracle, if you survive his test.</li>
+          <li><strong>Level VIII — The Brazen Tribunal:</strong> the circular court where every sentence is made singular.</li>
+          <li><strong>Level IX — The Infernal Archive:</strong> maps, records, relics, witnesses, and forbidden histories.</li>
+        </ol>
+        <p>Hell is unique to every individual. Its roads answer differently to every memory, wound, choice, and refusal. Yet certain constants remain for all souls determined to seek them: truth leaves evidence, power leaves victims, certainty leaves ruins, and no title can erase what was done.</p>
+        <p>Hell judges no soul. It has, however, taken upon itself the burden of sentencing those delivered to it. No two sentences are alike. Each is shaped by the sins actually committed—not the reputation, doctrine, or allegiance claimed—and each is determined within the Brazen Tribunal.</p>
+        <p>Proceed with courage. Curiosity brought you to the gate; only honesty will carry you through it.</p>
+        <div class="welcome-signature"><img src="assets/fonts/devil.png" alt="Signed, S"></div>
+        <button type="button" class="welcome-close" data-welcome-close>Continue the Descent</button>
+      </div>
+    </dialog>
+
+    <div class="lava-divider"></div>
+
+    <section class="section infernal-code" id="infernal-code">
+      <h2 class="section-title">The Infernal Code</h2>
+      <p class="section-sub">
+        Six sins, six acts, and six truths form the moral furnace beneath Hell's Tales. They are not commandments. They are evidence.
+      </p>
+      <div class="code-grid">
+        <article class="code-column">
+          <h3>Six Infernal Sins 𓆙</h3>
+          <ol class="code-list">
+            <li><strong>I — Stupidity</strong><em>To possess the ability to think and choose not to.</em></li>
+            <li><strong>II — Hypocrisy</strong><em>To condemn another for the sins you excuse in yourself.</em></li>
+            <li><strong>III — Conformity</strong><em>To surrender your mind for the comfort of belonging.</em></li>
+            <li><strong>IV — Willful Ignorance</strong><em>To encounter truth and deliberately turn away.</em></li>
+            <li><strong>V — Cowardice</strong><em>To recognize injustice and remain silent when your voice could matter.</em></li>
+            <li><strong>VI — Certainty</strong><em>To believe yourself so righteous that you are no longer capable of doubt.</em></li>
+          </ol>
+        </article>
+        <article class="code-column">
+          <h3>Six Infernal Acts ☟</h3>
+          <ol class="code-list">
+            <li><strong>I — Betrayal</strong><em>To knowingly destroy the trust of one who placed it in you.</em></li>
+            <li><strong>II — Exploitation</strong><em>To use another person's weakness, desperation, ignorance, or dependence for your own benefit.</em></li>
+            <li><strong>III — Dehumanization</strong><em>To reduce another person to something less worthy of dignity than yourself.</em></li>
+            <li><strong>IV — Cruelty</strong><em>To cause suffering when suffering serves no necessary purpose.</em></li>
+            <li><strong>V — Corruption</strong><em>To knowingly poison something entrusted to your care.</em></li>
+            <li><strong>VI — Judgment</strong><em>To condemn another without first attempting to understand them.</em></li>
+          </ol>
+        </article>
+        <article class="code-column">
+          <h3>Six Infernal Truths 𓁹</h3>
+          <ol class="code-list">
+            <li><strong>I — Goodness requires choice.</strong><em>Fear can produce obedience. It cannot produce virtue.</em></li>
+            <li><strong>II — Belief is not truth.</strong><em>A million voices can repeat the same lie.</em></li>
+            <li><strong>III — Doubt is not failure.</strong><em>Only certainty fears the question.</em></li>
+            <li><strong>IV — Intent does not erase consequence.</strong><em>The wounded carry what the righteous intended to forget.</em></li>
+            <li><strong>V — Silence is a choice.</strong><em>There are sins committed with hands, and others committed by folding them.</em></li>
+            <li><strong>VI — No one is righteous.</strong><em>Beware anyone who claims otherwise. Especially yourself.</em></li>
+          </ol>
+        </article>
       </div>
     </section>
 
@@ -2902,6 +2943,24 @@
     </dialog>
     <!-- ORACLE ADDITION: ends -->
 
+    <section class="section tribunal-section" id="tribunal">
+      <h2 class="section-title">The Brazen Tribunal</h2>
+      <p class="tribunal-intro">The Tribunal is a circular court built so that no voice can hide behind another. The damned stand alone at its center while every accusation, memory, consequence, and contradiction is heard from all sides. Its six judges are never the same twice; the court changes its faces so precedent can never become prejudice.</p>
+      <figure class="tribunal-figure">
+        <img src="assets/tribunal/brazen-tribunal.png" alt="A rough ink rendering of the circular Brazen Tribunal, with the damned standing at its center among rings of judges, persecutors, witnesses, jurors, and the sentencer">
+        <figcaption>A forbidden court sketch. The center is reserved for the soul whose sentence is being forged.</figcaption>
+      </figure>
+      <div class="tribunal-order" aria-label="Officers of the Brazen Tribunal">
+        <article><span class="tribunal-count">6</span><span class="tribunal-role">Changing Judges</span></article>
+        <article><span class="tribunal-count">7</span><span class="tribunal-role">Persecutors</span></article>
+        <article><span class="tribunal-count">13</span><span class="tribunal-role">Witnesses</span></article>
+        <article><span class="tribunal-count">639</span><span class="tribunal-role">Jurors</span></article>
+        <article><span class="tribunal-count">1</span><span class="tribunal-role">Sentencer</span></article>
+      </div>
+      <p class="tribunal-note">The judges hear, the persecutors expose, the witnesses remember, and the jurors weigh the harm. Only the Sentencer speaks the final burden. Hell does not decide who is evil; it determines what truth requires of those already delivered to its court.</p>
+      <div class="tribunal-action"><a class="tribunal-button" href="stories/the-tribunal.html">Enter the Brazen Tribunal</a></div>
+    </section>
+
     <section class="section" id="archive">
       <h2 class="section-title">Infernal Archive</h2>
       <p class="section-sub">
@@ -3430,5 +3489,6 @@
   <!-- ORACLE ADDITION: riddle gate -->
   <script src="oracle-gate.js"></script>
   <script src="layers-of-hell.js"></script>
+  <script src="welcome-letter.js"></script>
 </body>
 </html>
