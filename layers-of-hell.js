@@ -1,15 +1,15 @@
 (() => {
   const levels = [
     ['about', 'The Threshold', 'The Testament'],
-    ['infernal-code', 'Level I', 'The Infernal Code'],
-    ['doctrine', 'Level II', 'The Doctrine'],
-    ['accused', 'Level III', 'The Accused'],
-    ['tome', 'Level IV', 'The Infernal Tome'],
-    ['holidays', 'Level V', 'The Infernal Holidays'],
-    ['holiday-directory', 'Level VI', 'The Calendar of Rites'],
-    ['oracle', 'Level VII', 'The Keeper of Knowledge'],
-    ['tribunal', 'Level VIII', 'The Brazen Tribunal'],
-    ['archive', 'Level IX', 'The Infernal Archive']
+    ['infernal-code', '⭕I', 'The Infernal Code'],
+    ['doctrine', '⭕II', 'The Doctrine'],
+    ['accused', '⭕III', 'The Accused'],
+    ['tome', '⭕IV', 'The Infernal Tome'],
+    ['holidays', '⭕V', 'The Infernal Holidays'],
+    ['holiday-directory', '⭕VI', 'The Calendar of Rites'],
+    ['oracle', '⭕VII', 'The Keeper of Knowledge'],
+    ['archive', '⭕VIII', 'The Infernal Archive'],
+    ['hells', '⭕IX', 'The Hells']
   ];
   const demons = {
     stories: ['assets/demons/medieval-crowned-demon.png', 'Crowned demon rendered as an antique woodcut', 'left'],
