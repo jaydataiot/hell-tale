@@ -1000,7 +1000,7 @@
     @media (max-width: 760px) {
       .tome-shell {
         aspect-ratio: auto;
-        width:min(620px,96vw);
+        width:min(620px,calc(100vw - 2rem));
         min-height: min(82vh, 780px);
       }
       .book {
@@ -1120,6 +1120,38 @@
       -webkit-backdrop-filter: blur(2px);
       backdrop-filter: blur(2px);
       box-shadow: 0 0 90px rgba(184, 27, 3, .26), inset 0 0 60px rgba(0, 0, 0, .78);
+    }
+    .infernal-audio-toggle {
+      position: fixed;
+      right: max(.75rem, env(safe-area-inset-right));
+      bottom: max(.75rem, env(safe-area-inset-bottom));
+      z-index: 1000;
+      min-width: 44px;
+      min-height: 44px;
+      padding: .62rem .8rem;
+      border: 1px solid #a52c17;
+      border-radius: 999px;
+      color: #f2d2ba;
+      background: rgba(12,2,1,.92);
+      box-shadow: 0 0 18px rgba(255,55,15,.3);
+      font: 800 .65rem Arial, sans-serif;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      cursor: pointer;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .infernal-audio-toggle:hover,
+    .infernal-audio-toggle:focus-visible {
+      color: #fff;
+      border-color: #ff7440;
+      box-shadow: 0 0 0 2px #260703, 0 0 24px rgba(255,67,18,.62);
+    }
+    @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+      .oracle-section .oracle-chamber { background: rgba(5,1,0,.92); }
+    }
+    @media (max-width: 480px) {
+      .infernal-audio-toggle { font-size: .6rem; }
     }
   </style>
   <link rel="stylesheet" href="layers-of-hell.css">
@@ -3449,47 +3481,25 @@
       });
     });
 
-    // Slight parallax on the floating demons.
-    addEventListener('mousemove', event => {
-      const x = event.clientX / innerWidth - .5;
-      const y = event.clientY / innerHeight - .5;
-      document.querySelectorAll('.demon').forEach((demon, index) => {
-        demon.style.marginLeft = (x * (index ? -18 : 18)) + 'px';
-        demon.style.marginTop = (y * (index ? -14 : 14)) + 'px';
-      });
-    });
-  
-    // Keep the Hell's Tales ambient soundtrack playing continuously.
-    const hellAmbientAudio = document.getElementById('hellAmbientAudio');
-    if (hellAmbientAudio) {
-      hellAmbientAudio.loop = true;
-      hellAmbientAudio.volume = 0.28;
-      try {
-        if (sessionStorage.getItem('hellsTalesAudioArmed') === 'true') {
-          sessionStorage.removeItem('hellsTalesAudioArmed');
-        }
-      } catch (error) {}
-
-      const startHellAudio = () => {
-        hellAmbientAudio.muted = false;
-        const attempt = hellAmbientAudio.play();
-        if (attempt && typeof attempt.catch === 'function') attempt.catch(() => {});
-      };
-
-      startHellAudio();
-      window.addEventListener('load', startHellAudio, { once: true });
-
-      // Audible autoplay is blocked by some browsers. The first click, tap,
-      // key press, or scroll starts the soundtrack without interrupting navigation.
-      ['pointerdown', 'touchstart', 'keydown', 'wheel'].forEach(eventName => {
-        document.addEventListener(eventName, startHellAudio, { once: true, passive: true });
-      });
-
-      document.addEventListener('visibilitychange', () => {
-        if (!document.hidden && hellAmbientAudio.paused) startHellAudio();
-      });
+    // Pointer-only parallax, throttled to one update per animation frame.
+    if (matchMedia('(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)').matches) {
+      const demons = Array.from(document.querySelectorAll('.demon'));
+      let parallaxFrame = 0;
+      addEventListener('pointermove', event => {
+        if (parallaxFrame) return;
+        parallaxFrame = requestAnimationFrame(() => {
+          const x = event.clientX / innerWidth - .5;
+          const y = event.clientY / innerHeight - .5;
+          demons.forEach((demon, index) => {
+            demon.style.marginLeft = (x * (index ? -18 : 18)) + 'px';
+            demon.style.marginTop = (y * (index ? -14 : 14)) + 'px';
+          });
+          parallaxFrame = 0;
+        });
+      }, { passive: true });
     }
   </script>
+  <script src="archive.js"></script>
   <!-- ORACLE ADDITION: riddle gate -->
   <script src="oracle-gate.js"></script>
   <script src="layers-of-hell.js"></script>

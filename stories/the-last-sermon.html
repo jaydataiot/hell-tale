@@ -6,7 +6,7 @@
   <title>The Last Sermon | Hell's Tales</title>
   <link rel="stylesheet" href="../archive.css">
 </head>
-<body>
+<body data-archive-root="../">
   <div class="embers"></div>
   <header class="site-head">
     <a class="brand" href="../hells-tales.html">Hell's Tales</a>
@@ -56,8 +56,6 @@
   </main>
 
   <audio id="hellStoryAudio" src="../assets/audio/hell-lava.mp3" autoplay loop preload="metadata" playsinline></audio>
-  <script>
-    (()=>{const audio=document.getElementById('hellStoryAudio');audio.volume=.34;const play=()=>audio.play().catch(()=>{});play();['pointerdown','keydown','touchstart'].forEach((eventName)=>window.addEventListener(eventName,play,{once:true,passive:true}));})();
-  </script>
+  <script src="../archive.js"></script>
 </body>
 </html>

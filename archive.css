@@ -15,6 +15,18 @@ a.panel{color:inherit;text-decoration:none}a.panel:hover{border-color:#e8421d;bo
 @media(max-width:720px){.site-head{align-items:flex-start}.head-links a:nth-child(2){display:none}.hero{min-height:55vh}.grid{grid-template-columns:1fr}.wide{grid-column:auto}.archive-nav{align-items:flex-start;flex-direction:column}.content{padding-top:3rem}.forbidden-map{padding:1rem .5rem 1.25rem}.map-label{padding:.3rem .38rem;letter-spacing:.06em}.map-label:after{height:.55rem}.map-frame:before{top:1%;font-size:.43rem;padding:.3rem}.map-legend{display:none}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;animation:none!important}}
 
+/* Cross-browser and small-device safeguards */
+img,video,canvas,svg,iframe{max-width:100%}img,video{height:auto}.map-video,.oracle-window iframe{height:100%}
+button,a,input,select,textarea{touch-action:manipulation}.site-head,.panel,.story-manuscript{min-width:0}
+.infernal-audio-toggle{position:fixed;right:max(.75rem,env(safe-area-inset-right));bottom:max(.75rem,env(safe-area-inset-bottom));z-index:1000;min-width:44px;min-height:44px;padding:.62rem .8rem;border:1px solid #a52c17;border-radius:999px;color:#f2d2ba;background:rgba(12,2,1,.92);box-shadow:0 0 18px rgba(255,55,15,.3);font:800 .65rem Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.infernal-audio-toggle:hover,.infernal-audio-toggle:focus-visible{color:#fff;border-color:#ff7440;outline:2px solid transparent;box-shadow:0 0 0 2px #260703,0 0 24px rgba(255,67,18,.62)}
+@supports(height:100dvh){body{min-height:100dvh}.hero,.story-hero{min-height:min(70dvh,58rem)}}
+@supports not ((backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px))){.site-head{background:#040100}}
+@media(hover:none){.head-links a:hover,.button:hover,a.panel:hover{transform:none}}
+@media(max-width:480px){.site-head{position:relative;flex-direction:column;align-items:center;text-align:center}.head-links{justify-content:center}.head-links a{min-height:44px;display:inline-flex;align-items:center}.brand{overflow-wrap:anywhere}.story-hero-inner{width:100%}.story-page-shell,.content{width:min(100% - 1rem,1180px)}.story-manuscript{padding:1.1rem}.story-body{font-size:1rem;line-height:1.72}.story-body p:first-of-type:first-letter{font-size:3.8rem}.character-portrait{height:auto;max-height:280px}.infernal-audio-toggle{font-size:.6rem}}
+@media(max-height:520px) and (orientation:landscape){.hero,.story-hero{min-height:100svh;padding-top:5rem;padding-bottom:2rem}.site-head{position:relative}}
+@media(forced-colors:active){.site-head,.panel,.story-manuscript,.infernal-audio-toggle{border:1px solid CanvasText}.infernal-audio-toggle{forced-color-adjust:auto}}
+
 /* Character registry portraits */
 .character-panel { overflow: hidden; }
 .character-portrait {
