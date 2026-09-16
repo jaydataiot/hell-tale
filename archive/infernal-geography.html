@@ -7,17 +7,12 @@
 <meta name="description" content="A forbidden map and field guide to the courts, gates, cities, and borders of Hell's Tales.">
 <title>Infernal Geography | Hell's Tales</title>
 <link rel="stylesheet" href="../archive.css">
+<link rel="stylesheet" href="../infernal-map.css">
 </head>
 <body data-archive-root="../">
 <div class="embers">
 </div>
-<header class="site-head">
-<a class="brand" href="../hells-tales.html">Hell's Tales</a>
-<nav class="head-links">
-<a href="../hells-tales.html#archive">Infernal Archive</a>
-<a href="story-index.html">Story Index</a>
-</nav>
-</header>
+
 
 <section class="hero">
 <div class="hero-copy">
@@ -27,12 +22,12 @@
 </div>
 </section>
 
-<section class="forbidden-map" aria-labelledby="map-title">
+<section class="forbidden-map" aria-label="Burning maps of Hell">
 <figure class="map-frame" data-burning-map>
-<img src="../assets/infernal-geography/map-of-hell.png" alt="A scorched forbidden map of Hell showing six connected infernal territories">
-<video class="map-video" src="../assets/infernal-geography/hell-map.mp4" muted playsinline preload="metadata" aria-label="The forbidden map of Hell burning away">
-</video>
-</figure>
+<img class="map-next" alt="" aria-hidden="true">
+<img class="map-current" src="../assets/infernal-geography/map-of-hell.png" alt="Forbidden map of Hell, plate 1 of 6">
+<canvas class="map-fire" aria-hidden="true"></canvas></figure>
+<div class="map-controls"><button id="map-pause" type="button" aria-pressed="false">Pause map cycle</button><span id="map-status" role="status">Map 1 of 6</span><button id="map-next" type="button">Burn to next map</button></div>
 <div class="map-legend" aria-hidden="true">
 <span>Gate</span>
 <span>Court</span>
@@ -54,53 +49,55 @@
 <p>The first threshold. New arrivals surrender their names long enough to hear the names others used for them.</p>
 <span class="tag">Threshold</span>
 <span class="tag">Intake</span>
+<p><a class="button" href="infernal-geography/cinder-gate.html">Explore The Cinder Gate →</a></p>
 </article>
 <article class="panel" id="brazen-tribunal">
 <h2>The Brazen Tribunal</h2>
 <p>A circular court without a fixed judge. The condemned stand at its center while evidence speaks in the voices of those affected by the accused.</p>
 <span class="tag">Court</span>
 <span class="tag">Testimony</span>
-<p><a class="button" href="brazen-tribunal.html">Open the Tribunal Record →</a></p>
+<p><a class="button" href="infernal-geography/brazen-tribunal.html">Open the Tribunal Record →</a></p>
 </article>
 <article class="panel" id="unfinished-city">
 <h2>Dis, the Unfinished City</h2>
 <p>A metropolis rebuilt nightly from failed utopias, ruined sanctuaries, and monuments erected to forgotten certainties.</p>
 <span class="tag">City</span>
 <span class="tag">Exile</span>
+<p><a class="button" href="infernal-geography/unfinished-city.html">Explore Dis, the Unfinished City →</a></p>
 </article>
 <article class="panel" id="scriptorium">
 <h2>The Scriptorium of Smoke</h2>
 <p>Forbidden drafts and erased gospels appear in ash, readable for one breath before the page goes clean.</p>
 <span class="tag">Archive</span>
 <span class="tag">Doctrine</span>
+<p><a class="button" href="infernal-geography/scriptorium.html">Explore The Scriptorium of Smoke →</a></p>
 </article>
 <article class="panel" id="mercy-wastes">
 <h2>The Mercy Wastes</h2>
 <p>A pale expanse where no punishment arrives. Those who cross it learn what they wanted punishment to explain.</p>
 <span class="tag">Wilderness</span>
 <span class="tag">Mercy</span>
+<p><a class="button" href="infernal-geography/mercy-wastes.html">Explore The Mercy Wastes →</a></p>
 </article>
 <article class="panel" id="unforbidden-border">
 <h2>The Unforbidden Border</h2>
 <p>No wall prevents passage beyond Hell. Few cross. A locked story can outlast any gate.</p>
 <span class="tag">Border</span>
 <span class="tag">Free Will</span>
+<p><a class="button" href="infernal-geography/unforbidden-border.html">Explore The Unforbidden Border →</a></p>
 </article>
 <article class="panel wide">
 <h2>Cartographer's warning</h2>
 <blockquote>Every map of Hell places its maker at a safe distance from the condemned. Distrust the scale. Distrust the legend. Walk anyway.</blockquote>
 </article>
 </div>
-<nav class="archive-nav">
-<a href="characters.html">← Characters</a>
-<a href="forbidden-texts.html">Next file: Forbidden Texts →</a>
-</nav>
+
 </main>
 <footer>Hell's Tales · Infernal Cartography · <span data-year>
 </span>
 </footer>
 <script src="../archive.js">
 </script>
-<script>window.addEventListener("DOMContentLoaded",()=>{const maps=["../assets/infernal-geography/map-of-hell.png","../assets/infernal-geography/map-of-hell-2.png","../assets/infernal-geography/map-of-hell-3.png","../assets/infernal-geography/map-of-hell-worn.png","../assets/infernal-geography/hell-map-charred.png","../assets/infernal-geography/hell-map-burned.png"];const videos=["../assets/infernal-geography/hell-map.mp4","../assets/infernal-geography/hell-map-2.mp4"];const frame=document.querySelector("[data-burning-map]");if(!frame)return;const image=frame.querySelector("img");const video=frame.querySelector(".map-video");if(!image||!video)return;let index=0;let timer;const holdMs=45000;const preloadImage=(src)=>{const next=new Image();next.src=src;};const showMap=()=>{image.src=maps[index];image.alt="Forbidden map of Hell, plate "+(index+1)+" of "+maps.length;frame.classList.remove("map-burning","map-burned");video.pause();preloadImage(maps[(index+1)%maps.length]);window.clearTimeout(timer);timer=window.setTimeout(()=>{index=(index+1)%maps.length;playVideo();},holdMs);};const playVideo=()=>{video.src=videos[index%videos.length];video.currentTime=0;frame.classList.add("map-burning");const started=video.play();if(started&&typeof started.catch==="function"){started.catch(showMap);}};video.addEventListener("ended",showMap);video.addEventListener("error",showMap);image.src=maps[0];playVideo();});</script>
+<script src="../infernal-map.js"></script>
 </body>
 </html>
