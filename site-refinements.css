@@ -1,0 +1,41 @@
+/* Let the lowercase cross turn while the intro title is fully visible. */
+.descent-title { animation-name: descentTitleReadable; }
+.descent-cross {
+  display: inline-block;
+  text-transform: none;
+  font-family: Georgia, "Times New Roman", serif;
+  font-weight: 400;
+  letter-spacing: 0;
+  transform-origin: 50% 54%;
+  animation: descentCrossTurn 1.1s 3.25s ease-in-out both;
+}
+@keyframes descentCrossTurn { from { transform: rotate(0deg); } to { transform: rotate(180deg); } }
+@keyframes descentTitleReadable {
+  0%, 46% { opacity: 0; transform: translate(-50%, -42%) scale(1.45); filter: blur(10px); }
+  60%, 88% { opacity: 1; transform: translate(-50%, -50%) scale(1); filter: blur(0); }
+  100% { opacity: 0; transform: translate(-50%, -50%) scale(.92); filter: blur(0); }
+}
+.holiday-divider {
+  position: relative;
+  z-index: 2;
+  width: min(1120px, calc(100% - 3rem));
+  height: 3px;
+  margin: 0 auto;
+  border: 0;
+  background: linear-gradient(90deg, transparent, #8a2916 15%, #ec995c 50%, #8a2916 85%, transparent);
+  box-shadow: 0 0 18px rgba(239, 72, 28, .35);
+}
+#holiday-directory { background: transparent; }
+#holiday-directory .holiday-card {
+  background: rgba(8, 2, 1, .18);
+  box-shadow: none;
+  text-shadow: 0 2px 4px #000, 0 0 10px #000;
+}
+#holiday-directory .holiday-card p { color: #c9ad97; }
+#holiday-directory .holiday-card:hover,
+#holiday-directory .holiday-card:focus-visible { border-color: #ef4b22; box-shadow: 0 0 22px rgba(255,49,5,.24); }
+@media (prefers-reduced-motion: reduce) { .descent-cross { animation: none; transform: rotate(180deg); } }
+
+.codex-art-page figure { margin: .8rem 0; flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: center; }
+.codex-art-page img { display: block; width: 100%; height: auto; max-height: 70%; object-fit: contain; mix-blend-mode: multiply; }
+.codex-art-page figcaption { margin-top: 1rem; color: #57351e; font: italic .85em/1.5 Georgia, serif; text-align: center; }

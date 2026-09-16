@@ -5,7 +5,7 @@
     ['doctrine', '⭕II', 'The Doctrine'],
     ['accused', '⭕III', 'The Accused'],
     ['tome', '⭕IV', 'The Infernal Tome'],
-    ['holidays', '⭕V', 'The Infernal Holidays'],
+    ['holidays', '⭕V', "Today's Infernal Holiday"],
     ['holiday-directory', '⭕VI', 'The Calendar of Rites'],
     ['oracle', '⭕VII', 'The Keeper of Knowledge'],
     ['archive', '⭕VIII', 'The Infernal Archive'],

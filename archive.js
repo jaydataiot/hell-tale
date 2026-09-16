@@ -1,9 +1,42 @@
+// Story Index and Geography keep their internal reading paths in the dialog.
+const infernalPopupMode = new URLSearchParams(location.search).get('popup');
+const infernalEmbedded = ['1', 'archive'].includes(infernalPopupMode) && window.self !== window.top;
+if (infernalEmbedded) {
+  window.parent.postMessage({ type: 'hells-tales-reader-audio', silent: document.body.dataset.audioDisabled === 'true' }, '*');
+  const archiveReader = infernalPopupMode === 'archive';
+  const base = document.createElement('base');
+  base.target = archiveReader ? '_self' : '_top';
+  document.head.appendChild(base);
+  const closeReader = () => window.parent.postMessage({ type: 'hells-tales-close-reader' }, '*');
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape') closeReader();
+  });
+  if (archiveReader) {
+    const siteRoot = new URL(document.body.dataset.archiveRoot || './', location.href);
+    document.addEventListener('click', event => {
+      const link = event.target.closest('a[href]');
+      if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || link.hasAttribute('download')) return;
+      const url = new URL(link.href);
+      if (url.origin !== siteRoot.origin || !url.pathname.startsWith(siteRoot.pathname) || !url.pathname.endsWith('.html')) return;
+      event.preventDefault();
+      if (url.pathname === new URL('hells-tales.html', siteRoot).pathname || url.pathname === new URL('index.html', siteRoot).pathname) {
+        closeReader();
+        return;
+      }
+      url.searchParams.set('popup', 'archive');
+      // Replace only the iframe document; the main page stays at the archive.
+      window.location.replace(url.href);
+    });
+  }
+}
+
 document.querySelectorAll('[data-year]').forEach((node) => {
   node.textContent = new Date().getFullYear();
 });
 
 /* One site-wide, navigation-aware audio controller. */
 (() => {
+  if (infernalEmbedded || document.body.dataset.audioDisabled === 'true') return;
   const ENABLED_KEY = 'hellsTalesAudioEnabled';
   const POSITION_KEY = 'hellsTalesAudioPosition';
   const MUTED_KEY = 'hellsTalesAudioMuted';
@@ -52,6 +85,7 @@ document.querySelectorAll('[data-year]').forEach((node) => {
   };
 
   const attemptPlay = ({ arm = false } = {}) => {
+    if (document.body.dataset.readerSilent === 'true') return Promise.resolve(false);
     if (arm) writeState(ENABLED_KEY, 'true');
     if (readState(ENABLED_KEY) !== 'true' || readState(MUTED_KEY) === 'true') return Promise.resolve(false);
     if (!audio.paused && !audio.ended) return Promise.resolve(true);

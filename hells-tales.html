@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#050100">
   <meta name="description" content="Hell's Tales is a dark anthology of stories about Hell, the Devil, faith, judgment, hypocrisy, and the question of who gets to define evil.">
-  <title>Hell's Tales</title>
+  <title>Hell's 𐕣ales</title>
   <style>
     :root {
       --black: #020100;
@@ -416,10 +416,8 @@
       padding: clamp(2.4rem, 5vw, 4rem) clamp(1.25rem, 6vw, 6rem);
       border-top: 1px solid rgba(202, 45, 16, .38);
       border-bottom: 1px solid rgba(202, 45, 16, .32);
-      background:
-        radial-gradient(circle at 50% 0%, rgba(255, 92, 22, .18), transparent 26rem),
-        linear-gradient(180deg, rgba(11, 2, 1, .96), rgba(32, 4, 1, .88) 52%, rgba(7, 1, 0, .98));
-      box-shadow: inset 0 18px 55px rgba(0,0,0,.75), inset 0 -18px 55px rgba(0,0,0,.65);
+      background: transparent;
+      box-shadow: none;
     }
     .judgment-counter::before {
       content: "";
@@ -1156,6 +1154,7 @@
   </style>
   <link rel="stylesheet" href="layers-of-hell.css">
   <link rel="stylesheet" href="tribunal-welcome.css">
+  <link rel="stylesheet" href="site-refinements.css">
   <script src="../assets/site-performance.js" defer></script>
 </head>
 <body class="descent-active">
@@ -1170,7 +1169,7 @@
     <span class="descent-soul" style="--x:96vw;--size:136px;--delay:.86s;--tilt:55deg;--rot:-35deg;--spin:-720deg;--drift:-27vw;--alpha:.54;--flail:.68s;--blur:.45px;"><img src="assets/falling-souls/soul-09.png" alt=""></span>
     <span class="descent-soul" style="--x:43vw;--size:76px;--delay:1.05s;--tilt:18deg;--rot:120deg;--spin:420deg;--drift:3vw;--alpha:.28;--flail:.8s;--blur:.7px;"><img src="assets/falling-souls/soul-05.png" alt=""></span>
     <span class="descent-soul" style="--x:58vw;--size:68px;--delay:1.28s;--tilt:-22deg;--rot:-100deg;--spin:-380deg;--drift:-4vw;--alpha:.22;--flail:.86s;--blur:.9px;"><img src="assets/falling-souls/soul-10.png" alt=""></span>
-    <div class="descent-title">Hell's Tales</div>
+    <div class="descent-title">Hell's <span class="descent-cross">✞</span>ales</div>
   </div>
   <canvas id="embers" aria-hidden="true"></canvas>
   <canvas id="inferno" aria-hidden="true"></canvas>
@@ -1201,7 +1200,7 @@
   </svg>
 
   <header>
-    <a href="#top" class="brand"><span class="brand-mark">♜</span> Hell's Tales</a>
+    <a href="#top" class="brand"><span class="brand-mark">♜</span> Hell's <b>𐕣</b>ales</a>
     <nav>
       <a class="nav-btn" href="#about"><h3>Λвou𐕣</h3></a>
       <a class="nav-btn" href="#stories"><h3>Ѕ𐕣oяιєѕ</h3></a>
@@ -1210,7 +1209,8 @@
       <a class="nav-btn" href="#doctrine"><h3>𝐈𝐈</h3></a>
       <a class="nav-btn" href="#accused"><h3>𝐈𝐈𝐈</h3></a>
       <a class="nav-btn" href="#tome"><h3>𝐈𝐕</h3></a>
-      <a class="nav-btn" href="#holidays"><h3>𝐕 - 𝐕𝐈</h3></a>
+      <a class="nav-btn" href="#holidays"><h3>𝐕</h3></a>
+      <a class="nav-btn" href="#holiday-directory"><h3>𝐕𝐈</h3></a>
       <!-- ORACLE ADDITION -->
       <a class="nav-btn" href="#oracle"><h3>𝐕𝐈𝐈</h3></a>
       <a class="nav-btn" href="#archive"><h3>𝐕𝐈𝐈𝐈</h3></a>
@@ -1221,7 +1221,7 @@
   <section class="hero" id="top">
     <div class="hero-copy">
       <div class="kicker">Every sermon has another side</div>
-      <h1>Hell's Tales</h1>
+      <h1>Hell's <b>𐕣</b>ales</h1>
       <p>
         An anthology of infernal stories about Hell, the Devil, faith, fear, judgment, and the people who profit from deciding who is damned. These are not morality plays. They are interrogations.
       </p>
@@ -1236,7 +1236,7 @@
           <div class="kicker">About the anthology</div>
           <h3>Hell is the setting. Judgment is the subject.</h3>
           <p>
-            Hell's Tales is a dark anthology centered on Hell and the Devil. Its stories explore faith, religious authority, guilt, temptation, punishment, moral hypocrisy, institutional power, rebellion, and the human need to divide the world into the saved and the damned.
+            Hell's <b>𐕣</b>ales is a dark anthology centered on Hell and the Devil. Its stories explore faith, religious authority, guilt, temptation, punishment, moral hypocrisy, institutional power, rebellion, and the human need to divide the world into the saved and the damned.
           </p>
           <p>
             The anthology uses horror, dark fantasy, satire, theological inversion, and psychological storytelling to challenge familiar assumptions. It is deliberately skeptical of easy moral categories. A priest can be monstrous. A demon can be compassionate. A believer can be faithless. A condemned soul can possess more integrity than the institution that condemned them.
@@ -1244,16 +1244,35 @@
           <p>
             The purpose is not to provide a new creed. It is to tell unsettling stories that force the reader to ask whether evil is defined by conduct, authority, reputation, scripture, power—or something much harder to manipulate.
           </p>
-          <button type="button" class="cta welcome-trigger" id="openWelcomeLetter">Welcome to Hell's Tales</button>
+          <button type="button" class="cta welcome-trigger" id="openWelcomeLetter">Welcome to Hell's <b>𐕣</b>ales</button>
         </div>
         <div class="seal" aria-hidden="true"><div class="devil-glyph">🔥</div></div>
       </div>
+      <br>
+      <section class="judgment-counter" aria-label="Souls ill-judged by Heaven">
+        <div class="judgment-counter-inner">
+          <div class="judgment-copy">
+            <div class="kicker">The Infernal Ledger</div>
+            <h2>Souls Ill-Judged By Heaven</h2>
+            <p>
+              Hell has been running for eons, and the count never stops. Every
+              rising number marks another soul condemned by certainty before truth
+              was allowed to testify.
+            </p>
+          </div>
+          <div class="soul-counter-panel">
+            <div class="soul-counter-label">Current disputed condemnations</div>
+            <span class="soul-counter-value" id="illJudgedCounter" aria-live="off">6,000,000,000</span>
+            <div class="soul-counter-note">Recorded by the courts below</div>
+          </div>
+        </div>
+      </section>
     </section>
 
     <section class="section" id="stories">
       <h2 class="section-title">Tales From Below</h2>
       <p class="section-sub">
-        Hell's Tales is built as an anthology: separate stories, eras, characters, and sins connected by one question—what if the version of evil we were taught was written by the side that won the argument? Each tale can stand alone while contributing to a larger mythology of Hell, Heaven, Satan, organized religion, and human hypocrisy.
+        Hell's <b>𐕣</b>ales is built as an anthology: separate stories, eras, characters, and sins connected by one question—what if the version of evil we were taught was written by the side that won the argument? Each tale can stand alone while contributing to a larger mythology of Hell, Heaven, Satan, organized religion, and human hypocrisy.
       </p>
 
       <div class="story-grid">
@@ -1300,30 +1319,12 @@
           <div class="story-meta">Reputation · Truth · Reckoning</div>
         </a>
       </div>
-    </section>
-
-    <section class="judgment-counter" aria-label="Souls ill-judged by Heaven">
-      <div class="judgment-counter-inner">
-        <div class="judgment-copy">
-          <div class="kicker">The Infernal Ledger</div>
-          <h2>Souls Ill-Judged By Heaven</h2>
-          <p>
-            Hell has been running for eons, and the count never stops. Every
-            rising number marks another soul condemned by certainty before truth
-            was allowed to testify.
-          </p>
-        </div>
-        <div class="soul-counter-panel">
-          <div class="soul-counter-label">Current disputed condemnations</div>
-          <span class="soul-counter-value" id="illJudgedCounter" aria-live="off">6,000,000,000</span>
-          <div class="soul-counter-note">Recorded by the courts below</div>
-        </div>
-      </div>
+      <p class="tome-help"><a class="cta" href="volumes/1/animated-anthology/index.html">Read the Animated Anthology →</a></p>
     </section>
 
     <dialog class="welcome-scroll" id="welcomeLetter" aria-labelledby="welcomeLetterTitle">
       <div class="welcome-scroll-inner">
-        <h2 id="welcomeLetterTitle">Welcome to Hell's Tales</h2>
+        <h2 id="welcomeLetterTitle">Welcome to Hell's <b>𐕣</b>ales</h2>
         <p>Brave and curious traveler, welcome. I salute you for crossing this threshold. Most souls do not choose to come here; fewer still arrive willingly, with their questions intact and their eyes open.</p>
         <p>Your descent begins beyond <strong>The Threshold — The Testament</strong>, where this anthology declares its purpose. <strong>Tales From Below</strong> then offers the first testimonies of those whose stories were simplified, silenced, or condemned.</p>
         <p>Below, the numbered Circles-⭕f-Hell await:</p>
@@ -1351,7 +1352,7 @@
     <section class="section infernal-code" id="infernal-code">
       <h2 class="section-title">The Infernal Code</h2>
       <p class="section-sub">
-        Six sins, six acts, and six truths form the moral furnace beneath Hell's Tales. They are not commandments. They are evidence.
+        Six sins, six acts, and six truths form the moral furnace beneath Hell's <b>𐕣</b>ales. They are not commandments. They are evidence.
       </p>
       <div class="code-grid">
         <article class="code-column">
@@ -1397,10 +1398,10 @@
           <div class="kicker">The central idea</div>
           <h3>Who benefits when evil is simple?</h3>
           <p>
-            Hell's Tales examines the gap between <strong>professed morality and practiced morality</strong>. Organized religion can promise compassion, humility, forgiveness, and charity while institutions and leaders sometimes pursue status, wealth, social control, exclusion, or political power. The stories live inside that contradiction.
+            Hell's <b>𐕣</b>ales examines the gap between <strong>professed morality and practiced morality</strong>. Organized religion can promise compassion, humility, forgiveness, and charity while institutions and leaders sometimes pursue status, wealth, social control, exclusion, or political power. The stories live inside that contradiction.
           </p>
           <p>
-            The anthology also treats Satan less as a fixed cartoon villain and more as a contested character: adversary, dissenter, scapegoat, witness, tempter, prosecutor, rebel, or even inconvenient truth-teller depending on the story. Hell's Tales does not require the reader to accept one theological answer. It asks the reader to inspect who is speaking, who is judging, and who gets silenced.
+            The anthology also treats Satan less as a fixed cartoon villain and more as a contested character: adversary, dissenter, scapegoat, witness, tempter, prosecutor, rebel, or even inconvenient truth-teller depending on the story. Hell's <b>𐕣</b>ales does not require the reader to accept one theological answer. It asks the reader to inspect who is speaking, who is judging, and who gets silenced.
           </p>
           <p>
             In this universe, damnation is rarely as simple as horns versus halos. Human institutions can be cruel. Sinners can be honest. Saints can be performative. Demons can tell the truth. And the most dangerous evil may be the kind that arrives wearing the language of virtue.
@@ -1420,7 +1421,7 @@
           <div class="kicker">The inherited story</div>
           <h3>The Devil as absolute evil</h3>
           <p>
-            The traditional accusation is familiar: Satan deceives, tempts, corrupts, rebels, and drags humanity away from salvation. Hell's Tales uses that image because its cultural power is enormous—but it refuses to leave the image unexamined.
+            The traditional accusation is familiar: Satan deceives, tempts, corrupts, rebels, and drags humanity away from salvation. Hell's <b>𐕣</b>ales uses that image because its cultural power is enormous—but it refuses to leave the image unexamined.
           </p>
           <p class="quote">A villain is easiest to understand when only his enemies are allowed to write the biography.</p>
         </div>
@@ -1440,9 +1441,7 @@
 
       <p class="section-sub">
         Forbidden volumes dragged from the archives below. Turn the pages to move
-        through each tome. The reader is built directly into the site and can be
-        expanded with complete stories, illustrations, tome plates, and historical
-        collections.
+        through each tome.
       </p>
 
       <div class="tome-stage">
@@ -2749,6 +2748,8 @@
 
 
               <!-- LEAF 9 — PAGE 17 / BACK COVER -->
+              <div class="flip-page"><div class="page-face front"><div class="tome-page-content codex-art-page"><div class="tome-kicker">The Cartographer's Plates · 1</div><h3>The First Threshold</h3><figure><img src="assets/infernal-geography/cinder-gate-sketch.png" alt="Worn ink illustration: The First Threshold" width="1536" height="1024" loading="lazy" decoding="async"><figcaption>The gate keeps every name that certainty tried to erase.</figcaption></figure><div class="page-number">Illustrated plate 1</div></div></div><div class="page-face back"><div class="tome-page-content codex-art-page"><div class="tome-kicker">The Cartographer's Plates · 2</div><h3>The Court of Testimony</h3><figure><img src="assets/infernal-geography/brazen-tribunal-sketch.png" alt="Worn ink illustration: The Court of Testimony" width="1536" height="1024" loading="lazy" decoding="async"><figcaption>No witness can be placed safely beyond the circle.</figcaption></figure><div class="page-number">Illustrated plate 2</div></div></div></div>
+              <div class="flip-page"><div class="page-face front"><div class="tome-page-content codex-art-page"><div class="tome-kicker">The Cartographer's Plates · 3</div><h3>A City Built from Exile</h3><figure><img src="assets/infernal-geography/unfinished-city-sketch.png" alt="Worn ink illustration: A City Built from Exile" width="1536" height="1024" loading="lazy" decoding="async"><figcaption>Every refuge begins as a place someone else refused to call home.</figcaption></figure><div class="page-number">Illustrated plate 3</div></div></div><div class="page-face back"><div class="tome-page-content codex-art-page"><div class="tome-kicker">The Cartographer's Plates · 4</div><h3>The Unwritten Gospel</h3><figure><img src="assets/infernal-geography/scriptorium-sketch.png" alt="Worn ink illustration: The Unwritten Gospel" width="1536" height="1024" loading="lazy" decoding="async"><figcaption>What was removed from the record has not stopped speaking.</figcaption></figure><div class="page-number">Illustrated plate 4</div></div></div></div>
               <div class="flip-page" data-page="8">
 
                 <div class="page-face front">
@@ -2896,7 +2897,7 @@
             class="tome-status"
             id="tomeStatus"
             aria-live="polite">
-            Pages 1–2 of 17
+            Pages 1–2 of 22
           </div>
 
           <button
@@ -2908,7 +2909,6 @@
 
         </div>
 
-
         <p class="tome-help">
           Use the buttons, keyboard arrow keys, or click the right page to turn
           forward and the left page to turn back. On smaller screens the tome
@@ -2919,7 +2919,7 @@
     </section>
 
     <section class="section" id="holidays">
-      <h2 class="section-title">Infernal Holidays</h2>
+      <h2 class="section-title">Today's Infernal Holiday</h2>
       <p class="section-sub">
         Hell is known for its holidays. Across the infernal calendar, ancient observances mark moments of rebellion, judgment, loss, remembrance, and defiance. Some commemorate events older than human history; others preserve traditions carried into Hell by the countless souls who have passed through its gates. Together, they form a calendar shaped by the history of the condemned—and by a realm determined to remember the stories Heaven would rather forget.
       </p>
@@ -2939,10 +2939,12 @@
       </div>
     </section>
 
+    <hr class="holiday-divider" aria-label="Section VI: Infernal Holiday Directory">
+
     <section class="section" id="holiday-directory">
       <h2 class="section-title">Infernal Holiday Directory</h2>
       <p class="section-sub">
-        Browse every known feast, remembrance, rebellion, joke, argument, and ritual in the Hell's Tales calendar. Each holiday links to a description page with the date, type, meaning, and site-use notes.
+        Browse every known feast, remembrance, rebellion, joke, argument, and ritual in the Hell's <b>𐕣</b>ales calendar. Each holiday links to a description page with the date, type, meaning, and site-use notes.
       </p>
       <div class="holiday-directory-grid" id="holidayDirectory"></div>
       <div class="holiday-controls" aria-label="Infernal holiday directory pagination">
@@ -2981,7 +2983,7 @@
     <section class="section" id="archive">
       <h2 class="section-title">Infernal Archive</h2>
       <p class="section-sub">
-        A Hell's Tales story world needs more than individual episodes. This archive is designed for the mythology behind the anthology and can grow as new stories are released.
+        A Hell's <b>𐕣</b>ales story world needs more than individual episodes. This archive is designed for the mythology behind the anthology and can grow as new stories are released.
       </p>
       <div class="archive-grid">
         <a class="archive-link" href="archive/story-index.html"><article class="archive-card"><h4>Story Index</h4><p>Browse tales by issue, chronology, theme, narrator, location, or circle of Hell.</p></article></a>
@@ -3017,7 +3019,7 @@
   </main>
 
   <footer>
-    <strong>Hell's Tales</strong><br><br>
+    <strong>Hell's <b>𐕣</b>ales</strong><br><br>
     <span>Every judgment has a witness. Every gospel has an editor.</span>
   </footer>
 
@@ -3504,5 +3506,6 @@
   <script src="oracle-gate.js"></script>
   <script src="layers-of-hell.js"></script>
   <script src="welcome-letter.js"></script>
+  <script src="page-popup.js"></script>
 </body>
 </html>

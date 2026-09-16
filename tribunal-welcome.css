@@ -120,3 +120,18 @@
   .tribunal-order article:last-child { grid-column: 1 / -1; }
   .welcome-scroll-inner { padding-inline: 1.5rem; }
 }
+
+/* Read section V, VI and VIII pages without leaving the descent. */
+.page-popup {
+  width: min(1100px, calc(100% - 2rem));
+  height: 88vh;
+  max-height: 88dvh;
+  overflow: hidden;
+  border: 2px solid #a77d42;
+  background: #100301;
+  box-shadow: 0 0 80px #000;
+}
+.page-popup[open] { display: flex; flex-direction: column; }
+.page-popup-close { flex: 0 0 auto; margin: .7rem auto; }
+.page-popup iframe { display: block; width: 100%; flex: 1; min-height: 0; border: 0; background: #050100; }
+html:has(.page-popup[open]) { overflow: hidden; }

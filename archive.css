@@ -35,3 +35,8 @@ button,a,input,select,textarea{touch-action:manipulation}.site-head,.panel,.stor
   filter: sepia(.08) saturate(.8) contrast(1.08) drop-shadow(0 10px 18px rgba(0,0,0,.75));
 }
 .character-panel .sigil { position: absolute; top: 1rem; left: 1rem; z-index: 1; }
+
+.location-sketch { margin: 0 0 2.5rem; }
+.location-sketch img { display:block; width:100%; height:auto; border:1px solid #795032; box-shadow:0 14px 45px #000; }
+.location-sketch figcaption { margin-top:.8rem; color:#aa8b70; text-align:center; font-style:italic; line-height:1.6; }
+.location-description { max-width:900px; }
