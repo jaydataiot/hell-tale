@@ -16,6 +16,17 @@
     tome: ['assets/demons/codex-manuscript-demon.png', 'Demon rendered in the style of a medieval illuminated manuscript', 'right'],
     archive: ['assets/demons/engraved-wandering-demon.png', 'Lanky wandering demon rendered as an antique engraving', 'left']
   };
+  const parentinoDemons = [
+    ['about', '01-skeletal-kneeling-demon.png', 'left', 'a'],
+    ['about', '08-red-flying-demon.png', 'right', 'b'],
+    ['infernal-code', '03-club-bearing-demon.png', 'right', 'a'],
+    ['doctrine', '04-hunched-demon.png', 'left', 'a'],
+    ['accused', '05-pale-horned-demon.png', 'right', 'a'],
+    ['holidays', '09-red-crouching-demon.png', 'left', 'a'],
+    ['holiday-directory', '07-ram-headed-demon.png', 'right', 'a'],
+    ['oracle', '06-screaming-winged-demon.png', 'left', 'a'],
+    ['oracle', '02-dark-winged-demon.png', 'right', 'b']
+  ];
 
   levels.forEach(([id, number, title]) => {
     const section = document.getElementById(id);
@@ -35,6 +46,19 @@
     image.className = `layer-demon layer-demon-${demon[2]}`;
     image.src = demon[0];
     image.alt = demon[1];
+    image.loading = 'lazy';
+    image.decoding = 'async';
+    section.append(image);
+  });
+
+  parentinoDemons.forEach(([id, filename, side, slot]) => {
+    const section = document.getElementById(id);
+    if (!section) return;
+    const image = document.createElement('img');
+    image.className = `parentino-section-demon parentino-${side} parentino-slot-${slot}`;
+    image.src = `assets/characters/parentino-demons-individual/${filename}`;
+    image.alt = '';
+    image.setAttribute('aria-hidden', 'true');
     image.loading = 'lazy';
     image.decoding = 'async';
     section.append(image);

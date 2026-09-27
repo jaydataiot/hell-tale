@@ -1,0 +1,89 @@
+/* Parentino figures belong to sections that previously had no displayed artwork. */
+#about,
+#infernal-code,
+#doctrine,
+#accused,
+#holidays,
+#holiday-directory,
+#oracle {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+#about > :not(.parentino-section-demon),
+#infernal-code > :not(.parentino-section-demon),
+#doctrine > :not(.parentino-section-demon),
+#accused > :not(.parentino-section-demon),
+#holidays > :not(.parentino-section-demon),
+#holiday-directory > :not(.parentino-section-demon),
+#oracle > :not(.parentino-section-demon) {
+  position: relative;
+  z-index: 3;
+}
+
+.parentino-section-demon {
+  --demon-scale: 1;
+  --demon-turn: 0deg;
+  position: absolute;
+  z-index: 2;
+  top: clamp(7.5rem, 16%, 13rem);
+  display: block;
+  width: clamp(135px, 18vw, 270px);
+  max-height: 68%;
+  object-fit: contain;
+  opacity: .56;
+  pointer-events: none;
+  user-select: none;
+  transform-origin: 50% 70%;
+  filter:
+    sepia(.08)
+    saturate(.78)
+    contrast(1.08)
+    drop-shadow(0 14px 16px rgba(0,0,0,.94))
+    drop-shadow(0 0 18px rgba(190,45,13,.26));
+  animation: sectionDemonLurk var(--demon-time, 9s) ease-in-out infinite alternate;
+}
+
+.parentino-left { left: clamp(-3.2rem, -2vw, -1rem); --demon-turn: 3deg; }
+.parentino-right { right: clamp(-3.2rem, -2vw, -1rem); --demon-turn: -3deg; animation-direction: alternate-reverse; }
+.parentino-slot-b { top: auto; bottom: clamp(2.5rem, 8%, 7rem); width: clamp(110px, 14vw, 210px); opacity: .48; --demon-scale: .9; }
+
+#about .parentino-left { left: clamp(-5.75rem, -5vw, -3rem); top: 22%; width: clamp(150px, 16vw, 225px); }
+#about .parentino-right { right: clamp(7.5rem, calc(4vw + 6rem), 10.5rem); }
+#infernal-code .parentino-section-demon { top: 14%; right: clamp(2rem, 6vw, 7rem); }
+#doctrine .parentino-section-demon { top: auto; bottom: 0; }
+#accused .parentino-section-demon { top: 15%; right: clamp(2rem, 6vw, 7rem); }
+#holidays .parentino-section-demon { top: calc(clamp(5.25rem, 9%, 7.5rem) - 3.5rem); left: calc(clamp(48%, 55vw, 62%) + 9rem); }
+#holiday-directory .parentino-section-demon { top: calc(19% - 13.75rem); right: auto; left: clamp(1rem, 4vw, 4rem); }
+#oracle .parentino-slot-a { top: 24%; left: clamp(-1.2rem, 0vw, 1rem); }
+#oracle .parentino-slot-b { right: clamp(-1.5rem, calc(8vw - 4.5rem), 4.5rem); bottom: 0; }
+
+@keyframes sectionDemonLurk {
+  from {
+    transform: translate3d(0, 8px, 0) rotate(var(--demon-turn)) scale(var(--demon-scale));
+    opacity: .42;
+  }
+  to {
+    transform: translate3d(0, -9px, 0) rotate(calc(var(--demon-turn) + 1.5deg)) scale(calc(var(--demon-scale) * 1.025));
+    opacity: .61;
+  }
+}
+
+@media (max-width: 900px) {
+  .parentino-section-demon { width: clamp(105px, 21vw, 165px); opacity: .38; }
+  .parentino-left { left: -3rem; }
+  .parentino-right { right: -3rem; }
+  .parentino-slot-b { width: clamp(90px, 17vw, 135px); opacity: .32; }
+}
+
+@media (max-width: 600px) {
+  .parentino-section-demon { width: 104px; max-height: 46%; opacity: .26; }
+  .parentino-left { left: -3.7rem; }
+  .parentino-right { right: -3.7rem; }
+  .parentino-slot-b { display: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .parentino-section-demon { animation: none; }
+}
