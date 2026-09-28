@@ -1275,19 +1275,19 @@
                 </div>
             </div>
             <br>
-            <section class="judgment-counter" aria-label="Souls ill-judged by Heaven">
+            <section class="judgment-counter" aria-label="Current Disputed Condemnations">
                 <div class="judgment-counter-inner">
                     <div class="judgment-copy">
                         <div class="kicker">The Infernal Ledger</div>
-                        <h2>Souls Ill-Judged By Heaven</h2>
+                        <h2>Current Disputed Condemnations</h2>
                         <p>
-                            Hell has been running for eons, and the count never stops. Every
+                            Hell has been running for eons, and the count of the damned never stops. Every
                             rising number marks another soul condemned by certainty before truth
                             was allowed to testify.
                         </p>
                     </div>
                     <div class="soul-counter-panel">
-                        <div class="soul-counter-label">Current disputed condemnations</div>
+                        <div class="soul-counter-label">Questionable condemnations</div>
                         <span class="soul-counter-value" id="illJudgedCounter" aria-live="off">6,000,000,000</span>
                         <div class="soul-counter-note">Recorded by the courts below</div>
                     </div>
@@ -2899,8 +2899,10 @@
         }
         lastEmberPaint = now;
         ectx.clearRect(0, 0, innerWidth, innerHeight);
-        for (const e of embers) { e.update();
-            e.draw(); }
+        for (const e of embers) {
+            e.update();
+            e.draw();
+        }
         requestAnimationFrame(animateEmbers);
     }
 
@@ -3028,8 +3030,10 @@
         drawInfernalHorizon(now);
 
         if (now >= nextBurstAt) spawnBurst(now);
-        flameBursts.forEach(f => { f.update(dt);
-            f.draw(); });
+        flameBursts.forEach(f => {
+            f.update(dt);
+            f.draw();
+        });
         flameBursts = flameBursts.filter(f => !f.done);
 
         requestAnimationFrame(animateFire);
@@ -3157,10 +3161,14 @@
         const rect = tome.getBoundingClientRect();
         const isNearTome = rect.top < innerHeight * .8 && rect.bottom > innerHeight * .2;
         if (!isNearTome) return;
-        if (event.key === 'ArrowRight') { event.preventDefault();
-            turnTome(1); }
-        if (event.key === 'ArrowLeft') { event.preventDefault();
-            turnTome(-1); }
+        if (event.key === 'ArrowRight') {
+            event.preventDefault();
+            turnTome(1);
+        }
+        if (event.key === 'ArrowLeft') {
+            event.preventDefault();
+            turnTome(-1);
+        }
     });
     const syncTomeForViewport = () => {
         tomeMobileIndex = Math.min(tomeIndex * 2, totalTomeFaces - 1);
