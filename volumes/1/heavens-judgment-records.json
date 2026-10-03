@@ -11,7 +11,7 @@
       "Cassiel, Advocate of Divine Credit",
       "Oriel, Warden of the Unending Decree"
     ],
-    "intro": "Heaven did not condemn Lucian for treating people as entries in a ledger. Its ledger used much the same method. The court asked whose name he had placed at the head of every column.",
+    "intro": "Heaven examined Lucian's accounts for evidence of unbelief. The court wanted to know who received credit for his wealth.",
     "counts": [
       [
         "Unbelief concealed by patronage",
@@ -31,10 +31,10 @@
       ],
       [
         "Unauthorized ownership of praise",
-        "His name on charitable buildings competed with the Almighty's. Heaven objected to the signature, not to the suffering the gifts concealed."
+        "His name on charitable buildings competed with the Almighty's. The court charged him with taking praise owed to God and passed over the suffering his gifts concealed."
       ]
     ],
-    "verdict": "Verdict: eternal torment, without credit for restitution. The court declined to hear the injured workers: their testimony could establish cruelty, but not wounded divine pride. Below, the ledger would finally count what Heaven had ignored."
+    "verdict": "Verdict: eternal torment, without credit for restitution. The court declined to hear the injured workers because their claims concerned earthly cruelty. Their testimony was forwarded to Hell."
   },
   {
     "slug": "the-pious",
@@ -122,7 +122,7 @@
       "Malach, Prosecutor of Deviations",
       "Azriel, Bearer of the Final Seal"
     ],
-    "intro": "Before the six judges below could hear a witness, Heaven issued one sentence for the entire congregation. It found their differences inconvenient. These are the heavenly officers, not the tribunal they later face in Hell.",
+    "intro": "Heaven issued one sentence for the entire congregation. The officers listed here signed that decree before the dead reached the six judges of the Brazen Tribunal.",
     "counts": [
       [
         "Worship conducted incorrectly",
@@ -159,7 +159,7 @@
       "Saphriel, Inquisitor of Unlicensed Meaning",
       "Keziel, Binder of the Eternal Writ"
     ],
-    "intro": "The warrant against Caldus was written in advance of his death. Heaven could not tolerate a living example of goodness surviving uncertainty. Its sentence awaited him while the furnace continued to burn.",
+    "intro": "Heaven issued a warrant against Caldus while he was still alive. The charges concerned his refusal to suppress the disputed texts.",
     "counts": [
       [
         "Writing \u201cWe do not know\u201d",
@@ -171,7 +171,7 @@
       ],
       [
         "Hearing the condemned",
-        "He listened to Nema before demanding a profession of faith. Heaven ruled that credibility belonged to allegiance, not to evidence."
+        "He listened to Nema before demanding a profession of faith. Heaven refused to consider testimony from a witness outside its authority."
       ],
       [
         "Questioning divine authorship",
@@ -186,7 +186,7 @@
         "Severin's censorship was praised, but his devotion to the abbey's prestige was condemned. Even obedient lies became sinful when their credit accrued to someone else."
       ]
     ],
-    "verdict": "Verdict: eternal torment, enforcement upon death; no appeal through later kindness. The story records Caldus's living resistance to that decree. Heaven wants an immaculate claim; the scriptorium below preserves the human cost of making it."
+    "verdict": "Verdict: eternal torment, enforcement upon death; no appeal through later kindness. Caldus continued copying the disputed accounts while the decree awaited enforcement."
   },
   {
     "slug": "the-last-sermon",
